@@ -13,7 +13,7 @@ export default function Navbar() {
             <span id="name_container" className="h-full flex justify-center items-center text-lg font-semibold italic md:text-2xl lg:text-4xl lg:w-fit lg:justify-normal">
                 StyleAI
             </span>
-            <span id="options_container" className="pr-30 h-full w-full aspect-square items-center justify-center hidden lg:flex">
+            <span id="options_container" className="pr-30 h-full w-full items-center justify-center hidden lg:flex">
                 <li id="options_list" className="gap-5 text-xl flex">
                     <ul className="text-purple-700 font-semibold">Closet</ul>
                     <ul>Outfits</ul>
@@ -25,7 +25,7 @@ export default function Navbar() {
                     <img src={menuIcon} className="h-full object-fill"/>
                 </span>
                 <span id="avatar_container" className="invisible lg:visible">
-                    <img src={avatarIcon} className="w-fit h-full border-3 rounded-full aspect-square object-fill"/>
+                    <img src={avatarIcon} className="h-full object-contain"/>
                 </span>
             </span>
         </nav>
