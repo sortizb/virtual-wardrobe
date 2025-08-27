@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <div id='main_page' className='flex w-full h-screen justify-center'>
+      <div id='app_container'>
         <Navbar></Navbar>
       </div>
     </>
