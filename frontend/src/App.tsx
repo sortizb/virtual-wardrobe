@@ -1,12 +1,16 @@
 import './App.css'
 import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Closet from './pages/Closet'
 
 function App() {
 
   return (
     <>
-      <div id='app_container'>
-        <Navbar></Navbar>
+      <div id='app_container' className='flex flex-col items-center gap-15'>
+        <Navbar/>
+        <Home/>
+        <Closet/>
       </div>
     </>
   )

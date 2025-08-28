@@ -12,7 +12,7 @@ function Navbar() {
     const { anchorElNavMenu, anchorElUserMenu, handleOpenNavMenu, handleCloseNavMenu, handleOpenUserMenu, handleCloseUserMenu} = useNavbarState();
 
     return (
-        <AppBar className='bg-white border-b-gray-500 rounded2xl shadow-md'>
+        <AppBar id="navbar" component='nav' className='bg-white border-b-gray-500 rounded2xl shadow-md'>
             <Container maxWidth='xl'>
                 <Toolbar disableGutters className='gap-1 flex-auto grow shrink items-center justify-between'>
                     <IconButton 
