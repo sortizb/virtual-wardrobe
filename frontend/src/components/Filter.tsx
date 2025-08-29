@@ -15,17 +15,20 @@ function Filter() {
             <TextField
                 id="search"
                 label="Search"
-                size="small"
+                size="medium"
                 type="text"
-                variant="filled"
+                variant="outlined"
                 className="w-full"
                 slotProps={{
                     input: {
                         startAdornment: (
                             <InputAdornment position="start">
-                                <img src={searchIcon}/>
+                                <img src={searchIcon} className="max-w-5"/>
                             </InputAdornment>
-                        )
+                        ),
+                        classes: {
+                            root: "rounded-2xl bg-gray-100"
+                        }
                     }
                 }}
             />

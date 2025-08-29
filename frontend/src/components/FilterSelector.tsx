@@ -12,14 +12,18 @@ interface FilterSelectorProps {
 
 function FilterSelector({id, label, labelId, multiple, options, className, minWidth}: FilterSelectorProps) {
     return (
-        <FormControl sx={{minWidth: minWidth}}>
-            <InputLabel id={labelId}>{label}</InputLabel>
+        <FormControl sx={{minWidth: minWidth, width: "fit"}}>
+            <InputLabel id={labelId} className="mb-10">{label}</InputLabel>
             <Select
             id={id}
+            label={label}
             labelId={labelId}
             multiple={multiple}
             className={className}
             autoWidth
+            slotProps={{
+                root: {className: "rounded-xl"}
+            }}
             >
                 {options.map((option) => (
                     <MenuItem value={option}>
