@@ -2,3 +2,4 @@
 <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Phoenix Group - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/favicon" title="favicon icons">Favicon icons created by Lizel Arina - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/close" title="close icons">Close icons created by ariefstudio - Flaticon</a>
+<div> Icons made by <a href="https://www.flaticon.com/authors/chanut" title="Chanut"> Chanut </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>

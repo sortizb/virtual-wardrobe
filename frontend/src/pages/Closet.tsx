@@ -1,11 +1,11 @@
 import { Container } from "@mui/material";
-import Searchbar from "../components/Searchbar";
+import Filter from "../components/Filter";
 
 
 function Closet() {
     return (
         <Container className="max-w-screen">
-            <Searchbar/>
+            <Filter/>
         </Container>
     );
 }

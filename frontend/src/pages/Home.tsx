@@ -18,7 +18,6 @@ function Home() {
                     Your fashion journey starts here.
                 </Typography>
             </Box>
-            {/* <Box className="grid grid-cols-2 gap-4"> */}
             <Stack spacing={5} direction="row">
                 <Button
                 size="large"
@@ -33,7 +32,6 @@ function Home() {
                     Create Outfit
                 </Button>
             </Stack>
-            {/* </Box> */}
         </Container>
     );
 }
