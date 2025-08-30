@@ -1,4 +1,4 @@
-import { Box, Card, CardActions, CardContent, CardMedia, Skeleton, Typography, Button, Stack } from "@mui/material";
+import { Card, CardActions, CardContent, CardMedia, Skeleton, Typography, Button, Stack } from "@mui/material";
 import ClothingPiece from "../models/ClothingPiece";
 
 interface ItemDisplayProps {
