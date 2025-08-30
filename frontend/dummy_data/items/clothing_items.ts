@@ -1,5 +1,5 @@
 import ClothingPiece from '../../src/models/ClothingPiece';
-import { Seasons } from '../../src/models/Types';
+import type { Seasons } from '../../src/models/Types';
 
 export const blackJacket = new ClothingPiece(
     "black_jacket",

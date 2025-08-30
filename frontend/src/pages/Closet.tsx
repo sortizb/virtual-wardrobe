@@ -1,16 +1,9 @@
 import { Container, Grid } from "@mui/material";
 import Filter from "../components/Filter";
 import ItemDisplay from "../components/ItemDisplay";
-import ClothingPiece from "../models/ClothingPiece";
-import type { Seasons } from "../models/Types";
+import { blackJacket, blackPants, whiteShirt, whiteSneakers, blackWatch } from '../../dummy_data/items/clothing_items';
 
-const data: ClothingPiece = new ClothingPiece(
-    "black_jacket",
-    "Casual Black Jacket",
-    "Upper", "black", new Set<Seasons>(["Spring", "Fall"]), new Set<string>(["casual"]), "/dummy_data/images/black_jacket.png"
-);
-
-const items= [data, data, data, data, data, data, undefined]
+const items = [blackJacket, blackPants, whiteShirt, whiteSneakers, blackWatch, blackJacket, blackPants, whiteShirt, whiteSneakers, blackWatch];
 
 function Closet() {
     return (

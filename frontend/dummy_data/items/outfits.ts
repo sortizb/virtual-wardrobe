@@ -1,6 +1,6 @@
 import Outfit from '../../src/models/Outfit';
 import { blackJacket, whiteShirt, blackPants, whiteSneakers } from './clothing_items';
-import { Seasons } from '../../src/models/Types';
+import type { Seasons } from '../../src/models/Types';
 
 export const casualOutfit = new Outfit(
     "casual_outfit_1",
