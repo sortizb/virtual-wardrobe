@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <div id='app_container' className='flex flex-col items-center gap-8'>
+      <div id='app_container' className='flex flex-col items-center gap-8 mb-15'>
         <Navbar/>
         <Home/>
         <Closet/>

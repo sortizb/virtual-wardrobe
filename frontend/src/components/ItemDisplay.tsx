@@ -8,16 +8,16 @@ interface ItemDisplayProps {
 function ItemDisplay({ data }: ItemDisplayProps) {
     return (
         <>
-        <Card className="border-1 border-gray-200 rounded-2xl">
+        <Card className="border-1 border-gray-200 rounded-2xl h-full shadow-lg">
             {data ? (
                 <CardMedia 
                     component="img"
                     image={data.imageUrl}
                     alt={data.name}
-                    className="p-2 rounded-2xl md:p-4 md:rounded-4xl"
+                    className="p-2 rounded-2xl md:p-4 md:rounded-4xl h-50 md:h-70 lg:h-80"
                 />
             ) : (
-                <Skeleton variant="rectangular" height={200} className="m-2 md:m-4 rounded-2xl md:rounded-4xl" />
+                <Skeleton variant="rectangular" className="m-2 md:m-4 rounded-2xl h-50 md:h-70 lg:h-80 md:rounded-4xl" />
             )}
             <CardContent className="hidden md:flex pt-0 pb-2">
                 {data ? (
@@ -36,7 +36,7 @@ function ItemDisplay({ data }: ItemDisplayProps) {
                                 key={season} 
                                 size="small" 
                                 variant="outlined" 
-                                color="primary"
+                                className="font-dmsans capitalize text-white bg-indigo-300 rounded-3xl font-semibold border-0"
                             >
                                 {season}
                             </Button>
@@ -46,7 +46,7 @@ function ItemDisplay({ data }: ItemDisplayProps) {
                                 key={tag} 
                                 size="small" 
                                 variant="outlined" 
-                                color="secondary"
+                                className="font-dmsans capitalize text-white bg-indigo-400 rounded-3xl font-semibold"
                             >
                                 {tag}
                             </Button>
