@@ -1,4 +1,4 @@
-import { Box, InputAdornment, TextField} from "@mui/material";
+import { Box, InputAdornment, TextField } from "@mui/material";
 import searchIcon from '../assets/search.png';
 import FilterSelector from "./FilterSelector";
 
@@ -32,35 +32,43 @@ function Filter() {
                     }
                 }}
             />
-            <Box className="w-full flex flex-col gap-2 md:flex-row md:justify-end">
-                <FilterSelector 
-                    id="colors-filter"
-                    label="Colors"
-                    labelId="colors-filter-label"
-                    options={["Blue", "Red", "Green"]}
-                    minWidth={90}
-                />
-                <FilterSelector 
-                id="season-filter"
-                label="Season"
-                labelId="season-filter-label"
-                options={["Spring", "Summer", "Fall", "Winter"]}
-                minWidth={95}
-                />
-                <FilterSelector 
-                id="tags-filter"
-                label="Tags"
-                labelId="tags-filter-label"
-                options={["Formal", "Casual", "Cozy"]}
-                minWidth={75}
-                />
-                <FilterSelector 
-                id="category-filter"
-                label="Category"
-                labelId="category-filter-label"
-                options={["Upper", "Lower", "Shoes", "Accessories"]}
-                minWidth={110}
-                />
+            <Box className="w-full flex flex-col gap-4">
+                <div className="grid grid-cols-2 gap-4">
+                    <FilterSelector 
+                        id="colors-filter"
+                        label="Colors"
+                        labelId="colors-filter-label"
+                        options={["Blue", "Red", "Green"]}
+                        minWidth={90}
+                        className="w-full"
+                    />
+                    <FilterSelector 
+                        id="season-filter"
+                        label="Season"
+                        labelId="season-filter-label"
+                        options={["Spring", "Summer", "Fall", "Winter"]}
+                        minWidth={95}
+                        className="w-full"
+                    />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                    <FilterSelector 
+                        id="tags-filter"
+                        label="Tags"
+                        labelId="tags-filter-label"
+                        options={["Formal", "Casual", "Cozy"]}
+                        minWidth={75}
+                        className="w-full"
+                    />
+                    <FilterSelector 
+                        id="category-filter"
+                        label="Category"
+                        labelId="category-filter-label"
+                        options={["Upper", "Lower", "Shoes", "Accessories"]}
+                        minWidth={110}
+                        className="w-full"
+                    />
+                </div>
             </Box>
         </Box>
     )
