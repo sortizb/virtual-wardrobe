@@ -1,8 +1,8 @@
 import { Button, Box, Container, Stack, Typography } from "@mui/material";
 
-function Home() {
+function Greeting() {
     return (
-        <Container id="home_container" maxWidth="xl" className="flex flex-col gap-5 items-center">
+        <Container id="Greeting_container" maxWidth="xl" className="flex flex-col gap-5 items-center">
             <Box className="mt-25 p-5 bg-gray-200 rounded-xl flex flex-col items-center gap-5 w-full">
                 <Typography
                 variant="h2"
@@ -36,4 +36,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Greeting;
