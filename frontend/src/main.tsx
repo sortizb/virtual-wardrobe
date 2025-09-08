@@ -1,17 +1,18 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
 import theme from "./muiTheme.tsx"
+import './styles/main.css'
 
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import GlobalStyles from '@mui/material/GlobalStyles';
+import AppRoutes from './routes/AppRoutes.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <StyledEngineProvider enableCssLayer>
       <ThemeProvider theme={theme}>
         <GlobalStyles styles="@layer theme, base, mui, components, utilities;" />
-        <App />
+        <AppRoutes />
       </ThemeProvider>
     </StyledEngineProvider>
   </StrictMode>

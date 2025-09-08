@@ -2,6 +2,7 @@ import logoPlaceHolder from '../assets/favicon.png';
 import menuIcon from '../assets/menu.png';
 import avatarIcon from '../assets/user.png';
 import { AppBar, Container, Toolbar, Typography, Box, Avatar, IconButton, Menu, MenuItem, Button } from '@mui/material';
+import { Link } from 'react-router';
 
 import useNavbarState from '../hooks/Navbar';
 
@@ -11,7 +12,7 @@ interface NavbarProps {
 
 function Navbar({currentPage}: NavbarProps) {
 
-    const pages = ["Closet", "Outfits", "Add"];
+    const pages = ["closet", "outfits", "add"];
     const userSettings = ["My Profile", "Preferences", "Logout"];
     const { anchorElNavMenu, anchorElUserMenu, handleOpenNavMenu, handleCloseNavMenu, handleOpenUserMenu, handleCloseUserMenu} = useNavbarState();
 
@@ -43,11 +44,13 @@ function Navbar({currentPage}: NavbarProps) {
                     >
                         {pages.map((page) => (
                             <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                <Typography 
-                                className={`font-dmsans ${(page.toLowerCase() === currentPage) ? 'text-primary' : 'text-black'}`}
-                                >
-                                    {page}
-                                </Typography>
+                                <Link to={`/user/${page}`}>
+                                    <Typography
+                                    className={`font-dmsans capitalize ${(page === currentPage) ? 'text-primary' : 'text-black'}`}
+                                    >
+                                        {page}
+                                    </Typography>
+                                </Link>
                             </MenuItem>
                         ))}
 
@@ -63,10 +66,11 @@ function Navbar({currentPage}: NavbarProps) {
                     </Box>
                     <Box className='hidden md:flex items-center'>
                         {pages.map((page) => (
-                            <Button
-                            key={page}
-                            className={`font-dmsans normal-case text-xl ${(page.toLowerCase() === currentPage) ? 'text-primary' : 'text-black'}`}
-                            >{page}</Button>
+                            <Link to={`/user/${page}`} key={page}>
+                                <Button
+                                className={`font-dmsans capitalize text-xl ${(page === currentPage) ? 'text-primary' : 'text-black'}`}
+                                >{page}</Button>
+                            </Link>
                         ))}
                     </Box>
                     <IconButton onClick={handleOpenUserMenu}>

@@ -1,4 +1,4 @@
-import { Container, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import Filter from "../components/Filter";
 import ItemDisplay from "../components/ItemDisplay";
 import Navbar from "../components/Navbar";
@@ -22,7 +22,7 @@ function CollectionDisplay({whatToDisplay}: CollectionDisplayProps) {
     }, [whatToDisplay])
 
     return (
-        <>
+        <Box id='app_container' className='flex flex-col items-center gap-8 mb-5 md:mb-10 lg:mb-15'>
             <Navbar currentPage={whatToDisplay == "clothing" ? "closet" : "outfits"}/>
             <Greeting />
             <Container className="max-w-screen flex flex-col gap-4">
@@ -42,7 +42,7 @@ function CollectionDisplay({whatToDisplay}: CollectionDisplayProps) {
                     )}
                 </Grid>
             </Container>
-        </>
+        </Box>
     );
 }
 
