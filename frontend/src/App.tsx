@@ -1,5 +1,5 @@
 import './App.css';
-import CollectionDisplay from './pages/CollectionDIsplay';
+import CollectionDisplay from './pages/CollectionDisplay';
 
 
 function App() {
