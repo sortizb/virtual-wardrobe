@@ -5,7 +5,11 @@ import { AppBar, Container, Toolbar, Typography, Box, Avatar, IconButton, Menu, 
 
 import useNavbarState from '../hooks/Navbar';
 
-function Navbar() {
+interface NavbarProps {
+    currentPage: "closet" | "outfits" | "add";
+}
+
+function Navbar({currentPage}: NavbarProps) {
 
     const pages = ["Closet", "Outfits", "Add"];
     const userSettings = ["My Profile", "Preferences", "Logout"];
@@ -39,7 +43,11 @@ function Navbar() {
                     >
                         {pages.map((page) => (
                             <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                <Typography className='font-dmsans'>{page}</Typography>
+                                <Typography 
+                                className={`font-dmsans ${(page.toLowerCase() === currentPage) ? 'text-primary' : 'text-black'}`}
+                                >
+                                    {page}
+                                </Typography>
                             </MenuItem>
                         ))}
 
@@ -57,7 +65,7 @@ function Navbar() {
                         {pages.map((page) => (
                             <Button
                             key={page}
-                            className='font-dmsans text-black normal-case text-xl'
+                            className={`font-dmsans normal-case text-xl ${(page.toLowerCase() === currentPage) ? 'text-primary' : 'text-black'}`}
                             >{page}</Button>
                         ))}
                     </Box>

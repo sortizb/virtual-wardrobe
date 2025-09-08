@@ -1,8 +1,9 @@
 import { Card, CardActions, CardContent, CardMedia, Skeleton, Typography, Button, Stack } from "@mui/material";
 import ClothingPiece from "../models/ClothingPiece";
+import Outfit from "../models/Outfit";
 
 interface ItemDisplayProps {
-    data: ClothingPiece | undefined;
+    data: ClothingPiece | Outfit | undefined;
 }
 
 function ItemDisplay({ data }: ItemDisplayProps) {
