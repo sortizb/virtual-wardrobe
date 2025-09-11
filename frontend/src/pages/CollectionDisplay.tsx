@@ -4,12 +4,12 @@ import ItemDisplay from "../components/ItemDisplay";
 import Navbar from "../components/Navbar";
 import Greeting from "../components/Greeting";
 
-import type { Display } from "../models/Types";
+import type { ItemType } from "../models/Types";
 import useCollectionDisplayState from "../hooks/CollectionDisplay";
 import { useEffect } from "react";
 
 interface CollectionDisplayProps {
-    whatToDisplay: Display;
+    whatToDisplay: ItemType;
 }
 
 function CollectionDisplay({whatToDisplay}: CollectionDisplayProps) {
