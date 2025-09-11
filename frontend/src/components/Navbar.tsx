@@ -46,7 +46,7 @@ function Navbar({currentPage}: NavbarProps) {
                             <MenuItem key={page} onClick={handleCloseNavMenu}>
                                 <Link to={`/user/${page}`}>
                                     <Typography
-                                    className={`font-dmsans capitalize ${(page === currentPage) ? 'text-primary' : 'text-black'}`}
+                                    className={`font-dmsans capitalize ${(page === currentPage) ? 'text-primary underline underline-offset-2' : 'text-black'}`}
                                     >
                                         {page}
                                     </Typography>
@@ -68,7 +68,7 @@ function Navbar({currentPage}: NavbarProps) {
                         {pages.map((page) => (
                             <Link to={`/user/${page}`} key={page}>
                                 <Button
-                                className={`font-dmsans capitalize text-xl ${(page === currentPage) ? 'text-primary' : 'text-black'}`}
+                                className={`font-dmsans capitalize text-xl ${(page === currentPage) ? 'text-primary underline underline-offset-2' : 'text-black'}`}
                                 >{page}</Button>
                             </Link>
                         ))}
