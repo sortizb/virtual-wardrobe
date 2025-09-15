@@ -7,10 +7,11 @@ interface FilterSelectorProps {
     multiple?: boolean;
     options: string[];
     className?: string;
+    required?: boolean;
     minWidth: number;
 }
 
-function FilterSelector({id, label, labelId, multiple, options, className, minWidth}: FilterSelectorProps) {
+function Selector({id, label, labelId, multiple, options, className, required, minWidth}: FilterSelectorProps) {
     return (
         <FormControl sx={{minWidth: minWidth, width: "fit"}}>
             <InputLabel id={labelId} className="mb-10">{label}</InputLabel>
@@ -20,6 +21,7 @@ function FilterSelector({id, label, labelId, multiple, options, className, minWi
             labelId={labelId}
             multiple={multiple}
             className={className}
+            required={required}
             autoWidth
             slotProps={{
                 root: {className: "rounded-xl"}
@@ -36,4 +38,4 @@ function FilterSelector({id, label, labelId, multiple, options, className, minWi
     )
 }
 
-export default FilterSelector;
+export default Selector;

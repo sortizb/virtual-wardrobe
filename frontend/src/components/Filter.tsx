@@ -1,6 +1,6 @@
 import { Box, InputAdornment, TextField } from "@mui/material";
 import searchIcon from '../assets/search.png';
-import FilterSelector from "./FilterSelector";
+import Selector from "./Selector";
 
 
 function Filter() {
@@ -34,7 +34,7 @@ function Filter() {
             />
             <Box className="w-full flex flex-col gap-4">
                 <div className="grid grid-cols-2 gap-4">
-                    <FilterSelector 
+                    <Selector 
                         id="colors-filter"
                         label="Colors"
                         labelId="colors-filter-label"
@@ -42,7 +42,7 @@ function Filter() {
                         minWidth={90}
                         className="w-full"
                     />
-                    <FilterSelector 
+                    <Selector 
                         id="season-filter"
                         label="Season"
                         labelId="season-filter-label"
@@ -52,7 +52,7 @@ function Filter() {
                     />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                    <FilterSelector 
+                    <Selector 
                         id="tags-filter"
                         label="Tags"
                         labelId="tags-filter-label"
@@ -60,7 +60,7 @@ function Filter() {
                         minWidth={75}
                         className="w-full"
                     />
-                    <FilterSelector 
+                    <Selector 
                         id="category-filter"
                         label="Category"
                         labelId="category-filter-label"
