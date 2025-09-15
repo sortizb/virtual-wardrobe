@@ -1,4 +1,5 @@
 import { Button, Box, Container, Stack, Typography } from "@mui/material";
+import { Link } from "react-router";
 
 function Greeting() {
     return (
@@ -19,18 +20,26 @@ function Greeting() {
                 </Typography>
             </Box>
             <Stack spacing={5} direction="row">
-                <Button
-                size="large"
-                className="font-dmsans bg-primary text-white font-bold normal-case rounded-4xl"
+                <Link
+                to={"/user/add/clothing"}
                 >
-                    + Add Clothing
-                </Button>
-                <Button
-                size="large"
-                className="font-dmsans bg-white normal-case font-bold rounded-4xl border-2 border-black text-black"
+                    <Button
+                    size="large"
+                    className="font-dmsans bg-primary text-white font-bold normal-case rounded-4xl"
+                    >
+                        + Add Clothing
+                    </Button>
+                </Link>
+                <Link
+                to={"/user/add/outfit"}
                 >
-                    Create Outfit
-                </Button>
+                    <Button
+                    size="large"
+                    className="font-dmsans bg-white normal-case font-bold rounded-4xl border-2 border-black text-black"
+                    >
+                        Create Outfit
+                    </Button>
+                </Link>
             </Stack>
         </Container>
     );

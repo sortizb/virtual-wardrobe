@@ -55,15 +55,19 @@ function Navbar({currentPage}: NavbarProps) {
                         ))}
 
                     </Menu>
-                    <Box className='flex gap-1 hover:cursor-pointer'>
-                        <img src={logoPlaceHolder} alt='logo' className='p-0.5 max-h-10'/>
-                        <Typography
-                        variant='h5'
-                        className='text-primary font-borel italic pt-3 font-semibold'
-                        >
-                        StyleAI
-                        </Typography>
-                    </Box>
+                    <Link
+                    to={"/user/closet"}
+                    >
+                        <Box className='flex gap-1 hover:cursor-pointer'>
+                            <img src={logoPlaceHolder} alt='logo' className='p-0.5 max-h-10'/>
+                            <Typography
+                            variant='h5'
+                            className='text-primary font-borel italic pt-3 font-semibold'
+                            >
+                            StyleAI
+                            </Typography>
+                        </Box>
+                    </Link>
                     <Box className='hidden md:flex items-center'>
                         {pages.map((page) => (
                             <Link to={`/user/${page}`} key={page}>
