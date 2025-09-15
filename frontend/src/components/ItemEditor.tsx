@@ -14,7 +14,7 @@ function ItemEditor({ item_type, new_item, item_data }:ItemEditorProps) {
     console.log(item_type, new_item, item_data)
 
     return (
-        <Box gap={4} className='flex flex-col items-center justify-center w-full lg:w-[80%] px-5 py-10 border-2 rounded-xl border-gray-200 md:mt-10'>
+        <Box className='flex flex-col items-center justify-center w-full py-5 md:px-10 md:py-10 md:border-2 rounded-xl border-gray-200 md:mt-2 lg:w-[85%]'>
 
             <Typography 
             variant="h5"
@@ -23,13 +23,13 @@ function ItemEditor({ item_type, new_item, item_data }:ItemEditorProps) {
                 {item_data ? item_data.name : `New ${item_type}`}
             </Typography>
 
-            <Box gap={4} className='flex flex-col md:flex-row w-full p-5 items-center justify-center'>
+            <Box className='flex flex-col gap-5 md:flex-row w-full p-5 items-center justify-center lg:gap-15'>
                 <Card className="rounded-2xl shadow-md border-2 border-gray-100">
                     <CardMedia 
                         component="img"
                         image={item_data?.imageUrl ? item_data?.imageUrl : ''}
                         alt={item_data?.name ? item_data.name : 'Add Item'}
-                        className="p-2 rounded-2xl w-60 md:p-4 md:rounded-4xl h-70 md:h-90 lg:h-100"
+                        className="p-2 rounded-2xl w-60 md:p-4 md:rounded-4xl h-70 md:h-90 md:w-80 lg:h-110 lg:w-90"
                     />
                 </Card>
                 <Stack gap={2}>
@@ -43,7 +43,7 @@ function ItemEditor({ item_type, new_item, item_data }:ItemEditorProps) {
                         slotProps={{
                             input: {
                                 classes: {
-                                    root: "rounded-xl"
+                                    root: "rounded-xl w-65 lg:w-90"
                                 }
                             }
                         }}
@@ -55,35 +55,39 @@ function ItemEditor({ item_type, new_item, item_data }:ItemEditorProps) {
                                 label="Color"
                                 labelId="tags-selector-label"
                                 options={["Blue", "Red"]}
-                                minWidth={95}
-                                className="w-full"
-                            />
+                                minWidth={200}
+                                />
                             <Selector 
                                 id="type-selector"
                                 label="Clothing Type"
                                 labelId="type-selector-label"
                                 options={["Outter", "Upper", "Lower", "Shoes", "Accessory"]}
-                                minWidth={95}
-                                className="w-full"
-                            />
+                                minWidth={200}
+                                />
                         </>
-                    ) : (<></>)}
+                    ) : (
+                        <Selector
+                            id="clothes-selector"
+                            label="Clothes"
+                            labelId="clothes-selector-label"
+                            options={["Load", "User", "Clothing", "Here"]}
+                            minWidth={200}
+                        />  
+                    )}
                     <Selector 
                         id="season-selector"
                         label="Season"
                         labelId="season-selector-label"
                         options={["Spring", "Summer", "Fall", "Winter"]}
-                        minWidth={95}
-                        className="w-full"
-                    />
+                        minWidth={200}
+                        />
                     <Selector 
                         id="tags-selector"
                         label="Tags"
                         labelId="tags-selector-label"
                         options={["Formal", "Casual", "Cozy"]}
-                        minWidth={95}
-                        className="w-full"
-                    />
+                        minWidth={200}
+                        />
                     <Button
                     size="large"
                     className="bg-primary rounded-xl normal-case text-white text-md"

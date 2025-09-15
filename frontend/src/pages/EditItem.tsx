@@ -14,9 +14,9 @@ interface EditItemProps {
 
 function EditItem({ item_type, new_item, item_data }:EditItemProps) {
     return (
-        <Box id='app_container' className='flex flex-col items-center gap-8 mb-5 md:mb-10 lg:mb-15'>
-            <Navbar currentPage='add'/>
-            <Container className="max-w-screen flex flex-col gap-4 mt-20 items-center justify-center md:mt-25">
+        <Box id='app_container' className='flex flex-col items-center gap-8 p-10'>
+            <Navbar currentPage={new_item ? 'add' : 'other'}/>
+            <Container className="max-w-screen flex flex-col gap-4 mt-10 items-center justify-center md:mt-15">
 
                 {/* Tab Selector */}
                 <Stack direction={'row'} gap={4} className={`w-full items-center align-middle justify-center ${new_item ? '' : 'hidden'}`}>

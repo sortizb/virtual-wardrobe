@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 import useNavbarState from '../hooks/Navbar';
 
 interface NavbarProps {
-    currentPage: "closet" | "outfits" | "add";
+    currentPage: "closet" | "outfits" | "add" | "other";
 }
 
 function Navbar({currentPage}: NavbarProps) {
