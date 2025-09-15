@@ -1,4 +1,4 @@
-import { Box, Container, Stack, Tabs, Toolbar, Typography } from '@mui/material';
+import { Box, Container, Stack, Typography } from '@mui/material';
 import Navbar from '../components/Navbar';
 import type { ItemType } from '../models/Types';
 import type ClothingPiece from '../models/ClothingPiece';
