@@ -126,15 +126,17 @@ function Filter({ kind }: FilterProps) {
                         variant="text"
                         multiple
                     />
-                    <Selector 
-                        id="category-filter"
-                        label="Category"
-                        options={filterOptions ? filterOptions.clothingTypes : []}
-                        value={selectedCategories}
-                        onChange={setSelectedCategories}
-                        variant="text"
-                        multiple
-                    />
+                    {kind === "clothing" ? (
+                        <Selector 
+                            id="category-filter"
+                            label="Category"
+                            options={filterOptions ? filterOptions.clothingTypes : []}
+                            value={selectedCategories}
+                            onChange={setSelectedCategories}
+                            variant="text"
+                            multiple
+                        />
+                    ) : (<></>)}
                 </div>
             </Box>
         </Box>
