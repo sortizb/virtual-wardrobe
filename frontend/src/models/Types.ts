@@ -4,6 +4,11 @@ export type Seasons = "Spring" | "Summer" | "Fall" | "Winter";
 
 export type ItemType = "clothing" | "outfit";
 
+export type Color = {
+  name: string,
+  color: string // Hex
+}
+
 export type FilterOption = {
   key: string;
   value: string;

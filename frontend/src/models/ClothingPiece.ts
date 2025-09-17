@@ -1,13 +1,13 @@
 import WardrobeItem from "./WardrobeItem";
 import type { ClothingType } from "./Types";
-import type { Seasons } from "./Types";
+import type { Color, Seasons } from "./Types";
 
 export default class ClothingPiece extends WardrobeItem{
 
     type: ClothingType;
-    color: string;
+    color: Color;
 
-    constructor(id: string, name: string, type: ClothingType, color: string, 
+    constructor(id: string, name: string, type: ClothingType, color: Color, 
         seasons: Set<Seasons>, tags: Set<string>, imageUrl: string) {
 
             super(id, name, seasons, tags, imageUrl);
