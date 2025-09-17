@@ -16,6 +16,7 @@ function Selector({id, label, options, value, onChange, variant, multiple}: Sele
         <Autocomplete
         id={id}
         multiple={multiple}
+        limitTags={2}
         options={options}
         value={value}
         onChange={(_e, newValue) => onChange(newValue)}
