@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import theme from "./muiTheme.tsx"
+import theme from "./styles/muiTheme.tsx"
 import './styles/main.css'
 
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
