@@ -1,40 +1,52 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Autocomplete, Checkbox, TextField } from "@mui/material";
+import type { SelectorOption } from "../models/Types";
 
-interface FilterSelectorProps {
+interface SelectorProps {
     id: string;
     label: string;
-    labelId: string;
+    options: SelectorOption[];
+    value: SelectorOption | SelectorOption[] | null;
+    onChange: (newValue: SelectorOption | SelectorOption[] | null) => void;
+    variant: "text" | "color";
     multiple?: boolean;
-    options: string[];
-    className?: string;
-    required?: boolean;
-    minWidth: number;
 }
 
-function Selector({id, label, labelId, multiple, options, className, required, minWidth}: FilterSelectorProps) {
+function Selector({id, label, options, value, onChange, variant, multiple}: SelectorProps) {
     return (
-        <FormControl sx={{minWidth: minWidth, width: "fit"}}>
-            <InputLabel id={labelId} className="mb-10">{label}</InputLabel>
-            <Select
-            id={id}
-            label={label}
-            labelId={labelId}
-            multiple={multiple}
-            className={className}
-            required={required}
-            autoWidth
-            slotProps={{
-                root: {className: "rounded-xl"}
-            }}
-            >
-                {options.map((option) => (
-                    <MenuItem value={option}>
-                        {option}
-                    </MenuItem>
-                ))}
+        <Autocomplete
+        id={id}
+        multiple={multiple}
+        options={options}
+        value={value}
+        onChange={(_e, newValue) => onChange(newValue)}
+        disableCloseOnSelect={multiple} // If multiple, don't close on select
+        getOptionLabel={(opt) => opt.label}
+        isOptionEqualToValue={(one, other) => one.value == other.value}
+        renderOption={(props, option, { selected }) => {
+                return (
+                    <li {...props} className={`flex items-center gap-x-2 font-dmsans ${selected ? 'text-primary font-semibold' : ''}`}>
+                        <Checkbox checked={selected} />
+                        {variant === "color" && option.kind === "color" ? (
+                            <div className="flex items-center gap-x-2">
+                                <span className="w-4 h-4 rounded-full border"
+                                style={{backgroundColor: option.value}}
+                                />
 
-            </Select>
-        </FormControl>
+                                <span>{option.label}</span>
+                            </div>
+                        ) : (
+                            <span>{option.label}</span>
+                        )}
+                    </li> 
+                )
+            }}
+        renderInput={(params) => (
+            <TextField 
+            {...params}
+            label={label}
+            />
+        )}
+        />
     )
 }
 

@@ -9,10 +9,10 @@ export type FilterOption = {
   value: string;
 }
 
-export interface FilterOptions {
-  search?: string;
-  colors?: FilterOption[];
-  tags?: FilterOption[];
-  category?: FilterOption[];
-  season?: Seasons;
+// Type required to simplify the Selector component behavior
+
+export type SelectorOption = {
+  kind: "text" | "color";
+  value: string;
+  label: string;
 }
