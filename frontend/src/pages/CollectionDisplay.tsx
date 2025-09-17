@@ -26,7 +26,7 @@ function CollectionDisplay({whatToDisplay}: CollectionDisplayProps) {
             <Navbar currentPage={whatToDisplay == "clothing" ? "closet" : "outfits"}/>
             <Greeting />
             <Container className="max-w-screen flex flex-col gap-4">
-                <Filter/>
+                <Filter kind={whatToDisplay}/>
                 <Grid container spacing={2}>
                     {displayItems ? displayItems.map((item, index) => (
                         <Grid size={{ xs:6, sm: 4, md: 3, lg: 2}} key={`${item.id}-${index}`}>

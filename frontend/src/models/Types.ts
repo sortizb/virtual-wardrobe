@@ -1,3 +1,6 @@
+import ClothingPiece from "./ClothingPiece";
+import Outfit from "./Outfit";
+
 export type ClothingType = "Outer" | "Upper" | "Lower" | "Shoes" | "Accessory";
 
 export type Seasons = "Spring" | "Summer" | "Fall" | "Winter";
@@ -9,15 +12,22 @@ export type Color = {
   color: string // Hex
 }
 
-export type FilterOption = {
-  key: string;
-  value: string;
+export type User = {
+  // For the moment I only need it to store wardrobe data
+  clothing: ClothingPiece[],
+  outfits: Outfit[];
 }
 
 // Type required to simplify the Selector component behavior
-
 export type SelectorOption = {
   kind: "text" | "color";
   value: string;
   label: string;
+}
+
+export type FilterOptions = {
+  colors: SelectorOption[],
+  tags: SelectorOption[],
+  seasons: SelectorOption[],
+  clothingTypes: SelectorOption[]
 }

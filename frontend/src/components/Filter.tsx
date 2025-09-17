@@ -1,100 +1,72 @@
 import { Box, InputAdornment, TextField } from "@mui/material";
 import searchIcon from '../assets/search.png';
 import Selector from "./Selector";
-import type { SelectorOption } from "../models/Types";
-import { useState } from "react";
+import type { ClothingType, Color, FilterOptions, ItemType, Seasons, SelectorOption } from "../models/Types";
+import { dummyUser } from "../../dummy_data/users/users";
+import { useEffect, useState } from "react";
+import { getAllUserColors, getAllUserTags } from "../services/user";
 
+interface FilterProps {
+    kind: ItemType;
+}
 
-function Filter() {
+function Filter({ kind }: FilterProps) {
+
+    const [ filterOptions, setFilterOptions ] = useState<FilterOptions | undefined>({
+        colors: [],
+        tags: [],
+        seasons: [],
+        clothingTypes: []
+    });
 
     const [ selectedColors, setSelectedColors ] = useState<SelectorOption | SelectorOption[] | null>([]);
     const [ selectedSeasons, setSelectedSeasons ] = useState<SelectorOption | SelectorOption[] | null>([]);
     const [ selectedTags, setSelectedTags ] = useState<SelectorOption | SelectorOption[] | null>([]);
     const [ selectedCategories, setSelectedCategories ] = useState<SelectorOption | SelectorOption[] | null>([]);
 
+    async function loadFilterOptions(kind: ItemType) {
+        const seasons: SelectorOption[] = ["Spring", "Summer", "Fall", "Winter"].map((season: string) => (
+            {
+                kind: "text",
+                label: season,
+                value: season
+            }
+        ));
+        const categories: SelectorOption[] = ["Outer", "Upper", "Lower", "Shoes", "Accessory"].map((category: string) => (
+            {
+                kind: "text",
+                label: category,
+                value: category
+            }
+        ))
+        const tags: SelectorOption[] = getAllUserTags(dummyUser, kind).map((tag: string) => (
+            {
+                kind: "text",
+                label: tag,
+                value: tag
+            }
+        ));
+        const colors: SelectorOption[] = getAllUserColors(dummyUser).map((color: Color) => (
+            {
+                kind: "color",
+                label: color.name,
+                value: color.color
+            }
+        ));
 
-
-    const colors: SelectorOption[] = [
-        {
-            kind: "color",
-            label: "Blue",
-            value: "#2780F5"
-        },
-        {
-            kind: "color",
-            label: "Red",
-            value: "#F53127"
+        const filterOptions: FilterOptions = {
+            colors: colors,
+            tags: tags,
+            seasons: seasons,
+            clothingTypes: categories,
         }
-    ];
 
-    const seasons: SelectorOption[] = [
-        {
-            kind: "text",
-            label: "Spring",
-            value: "Spring"
-        },
-        {
-            kind: "text",
-            label: "Summer",
-            value: "Summer"
-        },
-        {
-            kind: "text",
-            label: "Fall",
-            value: "Fall"
-        },
-        {
-            kind: "text",
-            label: "Winter",
-            value: "Winter"
-        }
-    ];
+        setFilterOptions(filterOptions);
+    }
 
-    const tags: SelectorOption[] = [
-        {
-            kind: "text",
-            label: "Cozy",
-            value: "Cozy"
-        },
-        {
-            kind: "text",
-            label: "Casual",
-            value: "Casual"
-        },
-        {
-            kind: "text",
-            label: "Formal",
-            value: "Formal"
-        }
-    ]
-
-    const categories: SelectorOption[] = [
-        {
-            kind: "text",
-            label: "Upper",
-            value: "Upper"
-        },
-        {
-            kind: "text",
-            label: "Lower",
-            value: "Lower"
-        },
-        {
-            kind: "text",
-            label: "Outter",
-            value: "Outter"
-        },
-        {
-            kind: "text",
-            label: "Shoes",
-            value: "Shoes"
-        },
-        {
-            kind: "text",
-            label: "Accessory",
-            value: "Accessory"
-        },
-    ]
+    useEffect(() => {
+        loadFilterOptions(kind);
+    }, [kind])
 
     return (
         <Box 
@@ -128,7 +100,7 @@ function Filter() {
                     <Selector 
                         id="colors-filter"
                         label="Color"
-                        options={colors}
+                        options={filterOptions ? filterOptions.colors : []}
                         value={selectedColors}
                         onChange={setSelectedColors}
                         variant="color"
@@ -137,7 +109,7 @@ function Filter() {
                     <Selector 
                         id="season-filter"
                         label="Season"
-                        options={seasons}
+                        options={filterOptions ? filterOptions.seasons : []}
                         value={selectedSeasons}
                         onChange={setSelectedSeasons}
                         variant="text"
@@ -148,7 +120,7 @@ function Filter() {
                     <Selector 
                         id="tags-filter"
                         label="Tags"
-                        options={tags}
+                        options={filterOptions ? filterOptions.tags : []}
                         value={selectedTags}
                         onChange={setSelectedTags}
                         variant="text"
@@ -157,7 +129,7 @@ function Filter() {
                     <Selector 
                         id="category-filter"
                         label="Category"
-                        options={categories}
+                        options={filterOptions ? filterOptions.clothingTypes : []}
                         value={selectedCategories}
                         onChange={setSelectedCategories}
                         variant="text"
