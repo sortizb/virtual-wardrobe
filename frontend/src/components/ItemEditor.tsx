@@ -1,8 +1,9 @@
-import { Box, Button, Card, CardMedia, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardMedia, Icon, Stack, TextField, Typography } from "@mui/material";
 import type ClothingPiece from "../models/ClothingPiece";
 import type Outfit from "../models/Outfit";
 import type { ItemType } from "../models/Types";
 import Selector from "./Selector";
+import addIcon from "../assets/add.png";
 
 interface ItemEditorProps {
     item_type: ItemType;
@@ -24,14 +25,30 @@ function ItemEditor({ item_type, new_item, item_data }:ItemEditorProps) {
             </Typography>
 
             <Box className='flex flex-col gap-5 md:flex-row w-full p-5 items-center justify-center lg:gap-15'>
-                <Card className="rounded-2xl shadow-md border-2 border-gray-100">
-                    <CardMedia 
-                        component="img"
-                        image={item_data?.imageUrl ? item_data?.imageUrl : ''}
-                        alt={item_data?.name ? item_data.name : 'Add Item'}
-                        className="p-2 rounded-2xl w-60 md:p-4 md:rounded-4xl h-70 md:h-90 md:w-80 lg:h-110 lg:w-90"
-                    />
-                </Card>
+                
+                    {item_data?.imageUrl ? (
+                        <Card className="rounded-2xl shadow-md border-2 border-gray-100">
+                            <CardMedia 
+                                component="img"
+                                image={item_data?.imageUrl}
+                                alt={item_data?.name}
+                                className="p-2 rounded-2xl w-60 md:p-4 md:rounded-4xl h-70 md:h-90 md:w-80 lg:h-110 lg:w-90"
+                            />
+                        </Card>
+                    ) : (
+                        <div className="flex flex-col items-center justify-center bg-gray-100 gap-2
+                        border-2 border-dashed font-dmsans text-xl hover:bg-gray-200 hover:cursor-pointer
+                        rounded-2xl w-60 h-70 
+                        md:rounded-4xl md:h-90 md:w-80 
+                        lg:h-110 lg:w-80
+                        ">
+                            Add Image
+                            <Icon>
+                                <img src={addIcon} alt=""/>
+                            </Icon>
+                        </div>
+                    )}
+                
                 <Stack gap={2}>
                     <TextField
                         id="name"
