@@ -20,8 +20,8 @@ export type User = {
 
 // Type required to simplify the Selector component behavior
 export type SelectorOption = {
-  kind: "text" | "color";
-  value: string;
+  kind: "text" | "color" | "icon";
+  value: string | undefined;
   label: string;
 }
 
@@ -29,5 +29,6 @@ export type FilterOptions = {
   colors: SelectorOption[],
   tags: SelectorOption[],
   seasons: SelectorOption[],
-  clothingTypes: SelectorOption[]
+  clothingTypes: SelectorOption[],
+  clothingPieces: SelectorOption[]
 }

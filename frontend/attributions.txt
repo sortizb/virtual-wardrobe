@@ -4,3 +4,4 @@
 <a href="https://www.flaticon.com/free-icons/close" title="close icons">Close icons created by ariefstudio - Flaticon</a>
 <div> Icons made by <a href="https://www.flaticon.com/authors/chanut" title="Chanut"> Chanut </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
 <a href="https://www.flaticon.com/free-icons/plus" title="plus icons">Plus icons created by dmitri13 - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/clothes" title="clothes icons">Clothes icons created by M Karruly - Flaticon</a>

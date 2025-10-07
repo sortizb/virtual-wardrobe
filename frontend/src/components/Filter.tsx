@@ -4,7 +4,8 @@ import Selector from "./Selector";
 import type { ClothingType, Color, FilterOptions, ItemType, Seasons, SelectorOption } from "../models/Types";
 import { dummyUser } from "../../dummy_data/users/users";
 import { useEffect, useState } from "react";
-import { getAllUserColors, getAllUserTags } from "../services/user";
+import { getAllUserClothes, getAllUserColors, getAllUserTags } from "../services/user";
+import type ClothingPiece from "../models/ClothingPiece";
 
 interface FilterProps {
     kind: ItemType;
@@ -16,13 +17,15 @@ function Filter({ kind }: FilterProps) {
         colors: [],
         tags: [],
         seasons: [],
-        clothingTypes: []
+        clothingTypes: [],
+        clothingPieces: []
     });
 
     const [ selectedColors, setSelectedColors ] = useState<SelectorOption | SelectorOption[] | null>([]);
     const [ selectedSeasons, setSelectedSeasons ] = useState<SelectorOption | SelectorOption[] | null>([]);
     const [ selectedTags, setSelectedTags ] = useState<SelectorOption | SelectorOption[] | null>([]);
     const [ selectedCategories, setSelectedCategories ] = useState<SelectorOption | SelectorOption[] | null>([]);
+    const [ selectedClothing, setSelectedClothing ] = useState<SelectorOption | SelectorOption[] | null>([]);
 
     async function loadFilterOptions(kind: ItemType) {
         const seasons: SelectorOption[] = ["Spring", "Summer", "Fall", "Winter"].map((season: string) => (
@@ -53,12 +56,20 @@ function Filter({ kind }: FilterProps) {
                 value: color.color
             }
         ));
-
+        const clothingPieces: SelectorOption[] = getAllUserClothes(dummyUser).map((clothing: ClothingPiece) => (
+            {
+                kind: "icon",
+                label: clothing.name,
+                value: clothing.imageUrl
+            }
+        ))
+        
         const filterOptions: FilterOptions = {
             colors: colors,
             tags: tags,
             seasons: seasons,
             clothingTypes: categories,
+            clothingPieces: clothingPieces
         }
 
         setFilterOptions(filterOptions);
@@ -136,7 +147,17 @@ function Filter({ kind }: FilterProps) {
                             variant="text"
                             multiple
                         />
-                    ) : (<></>)}
+                    ) : (
+                        <Selector 
+                            id="clothing-filter"
+                            label="Clothing Pieces"
+                            options={filterOptions ? filterOptions.clothingPieces : []}
+                            value={selectedClothing}
+                            onChange={setSelectedClothing}
+                            variant="icon"
+                            multiple
+                        />
+                    )}
                 </div>
             </Box>
         </Box>

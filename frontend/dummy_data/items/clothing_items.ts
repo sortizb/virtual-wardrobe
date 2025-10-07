@@ -65,3 +65,16 @@ export const blackWatch = new ClothingPiece(
     new Set<string>(["formal", "business", "casual"]),
     "/dummy_data/images/black_watch.png"
 );
+
+export const graySuitPants = new ClothingPiece(
+    "gray_suit_pants",
+    "Gray Suit Pants",
+    "Lower",
+    {
+        name: "gray",
+        color: "#808080"
+    },
+    new Set<Seasons>(["Spring", "Fall", "Winter"]),
+    new Set<string>(["formal", "casual"]),
+    undefined
+)

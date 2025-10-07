@@ -11,11 +11,9 @@ function useCollectionDisplayState() {
 
     async function loadItems(whatToDisplay: ItemType) {
         setDisplayItems(undefined);
-        console.log("Loading " + whatToDisplay);
         await new Promise(res => setTimeout(res, 3000));
         const items = whatToDisplay == "clothing" ? getAllUserClothes(dummyUser) : whatToDisplay == "outfit" ? getAllUserOutfits(dummyUser) : undefined;
         setDisplayItems(items);
-        //console.log("Loaded: " + items);
     }
 
     return {displayItems, loadItems};

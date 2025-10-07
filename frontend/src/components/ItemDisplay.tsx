@@ -1,6 +1,7 @@
 import { Card, CardActions, CardContent, CardMedia, Skeleton, Typography, Button, Stack } from "@mui/material";
 import ClothingPiece from "../models/ClothingPiece";
 import Outfit from "../models/Outfit";
+import imagePlaceHolder from "../assets/clothes.png";
 
 interface ItemDisplayProps {
     data: ClothingPiece | Outfit | undefined;
@@ -13,9 +14,9 @@ function ItemDisplay({ data }: ItemDisplayProps) {
             {data ? (
                 <CardMedia 
                     component="img"
-                    image={data.imageUrl}
+                    image={data.imageUrl ? data.imageUrl : imagePlaceHolder}
                     alt={data.name}
-                    className="p-2 rounded-2xl md:p-4 md:rounded-4xl h-50 md:h-70 lg:h-80"
+                    className={`p-2 rounded-2xl md:p-4 md:rounded-4xl h-50 md:h-70 lg:h-80`}
                 />
             ) : (
                 <Skeleton variant="rectangular" className="m-2 md:m-4 rounded-2xl h-50 md:h-70 lg:h-80 md:rounded-4xl" />

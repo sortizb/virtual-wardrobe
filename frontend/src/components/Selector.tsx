@@ -7,7 +7,7 @@ interface SelectorProps {
     options: SelectorOption[];
     value: SelectorOption | SelectorOption[] | null;
     onChange: (newValue: SelectorOption | SelectorOption[] | null) => void;
-    variant: "text" | "color";
+    variant: "text" | "color" | "icon";
     multiple?: boolean;
 }
 
@@ -25,14 +25,19 @@ function Selector({id, label, options, value, onChange, variant, multiple}: Sele
         isOptionEqualToValue={(one, other) => one.value == other.value}
         renderOption={(props, option, { selected }) => {
                 return (
-                    <li {...props} className={`flex items-center gap-x-2 font-dmsans ${selected ? 'text-primary font-semibold' : ''}`}>
+                    <li {...props} className={`flex items-center gap-x-2 font-dmsans capitalize ${selected ? 'text-primary font-semibold' : ''}`}>
                         <Checkbox checked={selected} />
-                        {variant === "color" && option.kind === "color" ? (
+                        {variant !== "text" && option.kind !== "text" ? ( 
                             <div className="flex items-center gap-x-2">
-                                <span className="w-4 h-4 rounded-full border"
-                                style={{backgroundColor: option.value}}
-                                />
-
+                                {option.value ? (
+                                    <span className={"w-5 h-5 border rounded-sm"}
+                                    style={variant === "color" && option.kind === "color" ? {backgroundColor: option.value} : {}}
+                                    >
+                                        {variant === "icon" && option.kind === "icon" ? (
+                                            <img src={option.value}/>
+                                        ) : (<></>)}
+                                    </span>
+                                ) : (<></>)}
                                 <span>{option.label}</span>
                             </div>
                         ) : (

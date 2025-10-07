@@ -8,7 +8,7 @@ export default class ClothingPiece extends WardrobeItem{
     color: Color;
 
     constructor(id: string, name: string, type: ClothingType, color: Color, 
-        seasons: Set<Seasons>, tags: Set<string>, imageUrl: string) {
+        seasons: Set<Seasons>, tags: Set<string>, imageUrl: string | undefined) {
 
             super(id, name, seasons, tags, imageUrl);
             this.type = type;

@@ -6,9 +6,9 @@ export default class WardrobeItem {
     name: string;
     seasons: Set<Seasons>;
     tags: Set<string>;
-    imageUrl: string;
+    imageUrl: string | undefined;
 
-    constructor(id: string, name: string, seasons: Set<Seasons>, tags: Set<string>, imageUrl: string) {
+    constructor(id: string, name: string, seasons: Set<Seasons>, tags: Set<string>, imageUrl: string | undefined) {
        this.id = id;
        this.name = name;
        this.seasons = seasons;
