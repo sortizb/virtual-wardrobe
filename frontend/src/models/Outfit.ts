@@ -1,6 +1,6 @@
 import WardrobeItem from "./WardrobeItem";
 import ClothingPiece  from "./ClothingPiece";
-import type { Seasons } from "./Types";
+import type { Color, Season } from "./Types";
 
 
 export default class Outfit extends WardrobeItem {
@@ -8,11 +8,29 @@ export default class Outfit extends WardrobeItem {
     clothes: ClothingPiece[];
 
     constructor(id: string, name: string, clothes: ClothingPiece[],
-        seasons: Set<Seasons>, tags: Set<string>, imageUrl: string | undefined) {
+        seasons: Set<Season>, tags: Set<string>, imageUrl: string | undefined) {
 
             super(id, name, seasons, tags, imageUrl);
             this.clothes = clothes;
 
         }
+
+    hasColor(color: Color): boolean {
+        for (let piece of this.clothes) {
+            if (piece.color.color === color.color)
+                return true;
+        }
+        return false;
+    }
+
+    hasClothingPieceByID(id: string | undefined) {
+        if (!id) return false;
+        for (let piece of this.clothes) {
+            if (piece.id === id) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

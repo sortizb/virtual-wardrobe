@@ -1,5 +1,5 @@
 import ClothingPiece from '../../src/models/ClothingPiece';
-import type { Seasons } from '../../src/models/Types';
+import type { Season } from '../../src/models/Types';
 
 export const blackJacket = new ClothingPiece(
     "black_jacket",
@@ -9,7 +9,7 @@ export const blackJacket = new ClothingPiece(
         name: "black",
         color: "#000000"
     },
-    new Set<Seasons>(["Fall", "Winter"]),
+    new Set<Season>(["Fall", "Winter"]),
     new Set<string>(["casual", "party"]),
     "/dummy_data/images/black_jacket.png"
 );
@@ -22,7 +22,7 @@ export const blackPants = new ClothingPiece(
         name: "black",
         color: "#000000"
     },
-    new Set<Seasons>(["Spring", "Fall", "Winter"]),
+    new Set<Season>(["Spring", "Fall", "Winter"]),
     new Set<string>(["formal", "business"]),
     "/dummy_data/images/black_pants.png"
 );
@@ -35,7 +35,7 @@ export const whiteShirt = new ClothingPiece(
         name: "white",
         color: "#FFFFFF"
     },
-    new Set<Seasons>(["Spring", "Summer", "Fall"]),
+    new Set<Season>(["Spring", "Summer", "Fall"]),
     new Set<string>(["formal", "business", "casual"]),
     "/dummy_data/images/white_shirt.png"
 );
@@ -48,7 +48,7 @@ export const whiteSneakers = new ClothingPiece(
         name: "white",
         color: "#000000"
     },
-    new Set<Seasons>(["Spring", "Summer"]),
+    new Set<Season>(["Spring", "Summer"]),
     new Set<string>(["casual", "sports"]),
     "/dummy_data/images/white_sneakers.png"
 );
@@ -61,7 +61,7 @@ export const blackWatch = new ClothingPiece(
         name: "black",
         color: "#000000"
     },
-    new Set<Seasons>(["Spring", "Summer", "Fall", "Winter"]),
+    new Set<Season>(["Spring", "Summer", "Fall", "Winter"]),
     new Set<string>(["formal", "business", "casual"]),
     "/dummy_data/images/black_watch.png"
 );
@@ -74,7 +74,7 @@ export const graySuitPants = new ClothingPiece(
         name: "gray",
         color: "#808080"
     },
-    new Set<Seasons>(["Spring", "Fall", "Winter"]),
+    new Set<Season>(["Spring", "Fall", "Winter"]),
     new Set<string>(["formal", "casual"]),
     undefined
 )

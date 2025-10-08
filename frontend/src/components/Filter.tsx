@@ -1,25 +1,19 @@
 import { Box, InputAdornment, TextField } from "@mui/material";
 import searchIcon from '../assets/search.png';
 import Selector from "./Selector";
-import type { ItemType, SelectorOption } from "../models/Types";
-import { useEffect, useState } from "react";
+import type { ActiveFilter, Color, ItemType } from "../models/Types";
+import { act, useEffect } from "react";
 import { useFilterState } from "../hooks/Filter";
 
 interface FilterProps {
     kind: ItemType;
-
+    activeFilter: ActiveFilter;
+    onFilterChange: (filters: Partial<ActiveFilter>) => void;
 }
 
-function Filter({ kind }: FilterProps) {
+function Filter({ kind, activeFilter, onFilterChange }: FilterProps) {
 
-    const { filterOptions, loadOptions } = useFilterState();
-
-    const [ selectedColors, setSelectedColors ] = useState<SelectorOption | SelectorOption[] | null>([]);
-    const [ selectedSeasons, setSelectedSeasons ] = useState<SelectorOption | SelectorOption[] | null>([]);
-    const [ selectedTags, setSelectedTags ] = useState<SelectorOption | SelectorOption[] | null>([]);
-    const [ selectedCategories, setSelectedCategories ] = useState<SelectorOption | SelectorOption[] | null>([]);
-    const [ selectedClothing, setSelectedClothing ] = useState<SelectorOption | SelectorOption[] | null>([]);
-
+    const { filterOptions, loadOptions, handleSearchChange } = useFilterState();
 
     useEffect(() => {
         loadOptions(kind);
@@ -35,6 +29,8 @@ function Filter({ kind }: FilterProps) {
             <TextField
                 id="search"
                 label="Search"
+                value={activeFilter.search}
+                onChange={(e) => handleSearchChange(e, onFilterChange)}
                 size="medium"
                 type="text"
                 variant="outlined"
@@ -58,8 +54,8 @@ function Filter({ kind }: FilterProps) {
                         id="colors-filter"
                         label="Color"
                         options={filterOptions ? filterOptions.colors : []}
-                        value={selectedColors}
-                        onChange={setSelectedColors}
+                        value={activeFilter.colors}
+                        onChange={(newValue => onFilterChange({colors: Array.isArray(newValue) ? newValue : newValue ? [newValue] : null}))}
                         variant="color"
                         multiple
                     />
@@ -67,8 +63,8 @@ function Filter({ kind }: FilterProps) {
                         id="season-filter"
                         label="Season"
                         options={filterOptions ? filterOptions.seasons : []}
-                        value={selectedSeasons}
-                        onChange={setSelectedSeasons}
+                        value={activeFilter.seasons}
+                        onChange={(newValue => onFilterChange({seasons: Array.isArray(newValue) ? newValue : newValue ? [newValue] : null}))}
                         variant="text"
                         multiple
                     />
@@ -78,8 +74,8 @@ function Filter({ kind }: FilterProps) {
                         id="tags-filter"
                         label="Tags"
                         options={filterOptions ? filterOptions.tags : []}
-                        value={selectedTags}
-                        onChange={setSelectedTags}
+                        value={activeFilter.tags}
+                        onChange={(newValue => onFilterChange({tags: Array.isArray(newValue) ? newValue : newValue ? [newValue] : null}))}
                         variant="text"
                         multiple
                     />
@@ -88,8 +84,8 @@ function Filter({ kind }: FilterProps) {
                             id="category-filter"
                             label="Category"
                             options={filterOptions ? filterOptions.clothingTypes : []}
-                            value={selectedCategories}
-                            onChange={setSelectedCategories}
+                            value={activeFilter.clothingType}
+                            onChange={(newValue => onFilterChange({clothingType: Array.isArray(newValue) ? newValue : newValue ? [newValue] : null}))}
                             variant="text"
                             multiple
                         />
@@ -98,8 +94,8 @@ function Filter({ kind }: FilterProps) {
                             id="clothing-filter"
                             label="Clothing Pieces"
                             options={filterOptions ? filterOptions.clothingPieces : []}
-                            value={selectedClothing}
-                            onChange={setSelectedClothing}
+                            value={activeFilter.clothingPieces}
+                            onChange={(newValue => onFilterChange({clothingPieces: Array.isArray(newValue) ? newValue : newValue ? [newValue] : null}))}
                             variant="icon"
                             multiple
                         />

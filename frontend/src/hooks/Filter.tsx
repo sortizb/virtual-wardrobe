@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { dummyUser } from "../../dummy_data/users/users";
 import type ClothingPiece from "../models/ClothingPiece";
-import type { Color, FilterOptions, ItemType, SelectorOption } from "../models/Types";
+import type { ActiveFilter, Color, FilterOptions, ItemType, SelectorOption } from "../models/Types";
 import { getAllUserTags, getAllUserColors, getAllUserClothes } from "../services/user";
 
 
@@ -48,7 +48,8 @@ async function loadFilterOptions(kind: ItemType, setFilterOptions: Function) {
             {
                 kind: "icon",
                 label: clothing.name,
-                value: clothing.imageUrl
+                value: clothing.imageUrl ?? "",
+                id: clothing.id
             }
         ));
     }
@@ -73,5 +74,8 @@ export function useFilterState() {
             clothingPieces: []
         });
     const loadOptions = (kind: ItemType) => loadFilterOptions(kind, setFilterOptions);
-    return {filterOptions, loadOptions};
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, onFilterChange: (activeFilter: Partial<ActiveFilter>) => void ) => {
+        onFilterChange({ search: event.target.value })
+    };
+    return {filterOptions, loadOptions, handleSearchChange};
 }

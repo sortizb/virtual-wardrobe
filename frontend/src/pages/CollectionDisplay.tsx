@@ -14,7 +14,7 @@ interface CollectionDisplayProps {
 
 function CollectionDisplay({whatToDisplay}: CollectionDisplayProps) {
 
-    const {displayItems, loadItems} = useCollectionDisplayState();
+    const {displayItems, loadItems, activeFilter, applyFilters} = useCollectionDisplayState();
     const SKELETON_COUNT = 6;
 
     useEffect(() => {
@@ -26,7 +26,7 @@ function CollectionDisplay({whatToDisplay}: CollectionDisplayProps) {
             <Navbar currentPage={whatToDisplay == "clothing" ? "closet" : "outfits"}/>
             <Greeting />
             <Container className="max-w-screen flex flex-col gap-4">
-                <Filter kind={whatToDisplay}/>
+                <Filter kind={whatToDisplay} activeFilter={activeFilter} onFilterChange={applyFilters}/>
                 <Grid container spacing={2}>
                     {displayItems ? displayItems.map((item, index) => (
                         <Grid size={{ xs:6, sm: 4, md: 3, lg: 2}} key={`${item.id}-${index}`}>
