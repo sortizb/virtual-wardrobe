@@ -1,25 +1,18 @@
 import { Box, InputAdornment, TextField } from "@mui/material";
 import searchIcon from '../assets/search.png';
 import Selector from "./Selector";
-import type { ClothingType, Color, FilterOptions, ItemType, Seasons, SelectorOption } from "../models/Types";
-import { dummyUser } from "../../dummy_data/users/users";
+import type { ItemType, SelectorOption } from "../models/Types";
 import { useEffect, useState } from "react";
-import { getAllUserClothes, getAllUserColors, getAllUserTags } from "../services/user";
-import type ClothingPiece from "../models/ClothingPiece";
+import { useFilterState } from "../hooks/Filter";
 
 interface FilterProps {
     kind: ItemType;
+
 }
 
 function Filter({ kind }: FilterProps) {
 
-    const [ filterOptions, setFilterOptions ] = useState<FilterOptions | undefined>({
-        colors: [],
-        tags: [],
-        seasons: [],
-        clothingTypes: [],
-        clothingPieces: []
-    });
+    const { filterOptions, loadOptions } = useFilterState();
 
     const [ selectedColors, setSelectedColors ] = useState<SelectorOption | SelectorOption[] | null>([]);
     const [ selectedSeasons, setSelectedSeasons ] = useState<SelectorOption | SelectorOption[] | null>([]);
@@ -27,56 +20,9 @@ function Filter({ kind }: FilterProps) {
     const [ selectedCategories, setSelectedCategories ] = useState<SelectorOption | SelectorOption[] | null>([]);
     const [ selectedClothing, setSelectedClothing ] = useState<SelectorOption | SelectorOption[] | null>([]);
 
-    async function loadFilterOptions(kind: ItemType) {
-        const seasons: SelectorOption[] = ["Spring", "Summer", "Fall", "Winter"].map((season: string) => (
-            {
-                kind: "text",
-                label: season,
-                value: season
-            }
-        ));
-        const categories: SelectorOption[] = ["Outer", "Upper", "Lower", "Shoes", "Accessory"].map((category: string) => (
-            {
-                kind: "text",
-                label: category,
-                value: category
-            }
-        ))
-        const tags: SelectorOption[] = getAllUserTags(dummyUser, kind).map((tag: string) => (
-            {
-                kind: "text",
-                label: tag,
-                value: tag
-            }
-        ));
-        const colors: SelectorOption[] = getAllUserColors(dummyUser).map((color: Color) => (
-            {
-                kind: "color",
-                label: color.name,
-                value: color.color
-            }
-        ));
-        const clothingPieces: SelectorOption[] = getAllUserClothes(dummyUser).map((clothing: ClothingPiece) => (
-            {
-                kind: "icon",
-                label: clothing.name,
-                value: clothing.imageUrl
-            }
-        ))
-        
-        const filterOptions: FilterOptions = {
-            colors: colors,
-            tags: tags,
-            seasons: seasons,
-            clothingTypes: categories,
-            clothingPieces: clothingPieces
-        }
-
-        setFilterOptions(filterOptions);
-    }
 
     useEffect(() => {
-        loadFilterOptions(kind);
+        loadOptions(kind);
     }, [kind])
 
     return (
