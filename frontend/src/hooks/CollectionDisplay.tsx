@@ -55,12 +55,31 @@ function useCollectionDisplayState() {
         // For Clothing Pieces: OR relationship
         // For Outfits: AND relationship
         if (newFilters.colors && newFilters.colors.length > 0) {
-            filtered = filtered.filter(item =>
-                newFilters.colors!.some(color => 
-                    item instanceof ClothingPiece ?
-                    item.color.color === color.value :
-                    item.hasColor({name: color.label, color: color.value})
-                )
+            filtered = filtered.filter(item => {
+                // Clothing Pieces: OR relationship
+                if (item instanceof ClothingPiece) {
+                    for (const selectedColor of newFilters.colors!) {
+                        if (item.color.color == selectedColor.value) return true;
+                    }
+                    return false;
+                }
+                // Outfit: AND relationship (include all selected colors)
+                else if (item instanceof Outfit) {
+                    for (const selectedColor of newFilters.colors!) {
+                        // If a selectedColor not in outfit, return false
+                        if (!item.hasColor({name: selectedColor.label, color: selectedColor.value})) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                else return false;
+            }
+                // newFilters.colors!.some(color => 
+                //     item instanceof ClothingPiece ?
+                //     item.color.color === color.value :
+                //     item.hasColor({name: color.label, color: color.value})
+                // )
             );
         }
 
