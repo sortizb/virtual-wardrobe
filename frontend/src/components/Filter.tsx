@@ -1,8 +1,8 @@
 import { Box, InputAdornment, TextField } from "@mui/material";
 import searchIcon from '../assets/search.png';
 import Selector from "./Selector";
-import type { ActiveFilter, Color, ItemType } from "../models/Types";
-import { act, useEffect } from "react";
+import type { ActiveFilter, ItemType } from "../models/Types";
+import { useEffect } from "react";
 import { useFilterState } from "../hooks/Filter";
 
 interface FilterProps {

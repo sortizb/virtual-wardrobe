@@ -35,7 +35,7 @@ async function loadFilterOptions(kind: ItemType, setFilterOptions: Function) {
     let clothingPieces: SelectorOption[] = [];
 
     if (kind == "clothing") {
-        clothingTypes = ["Outter", "Upper", "Lower", "Shoes", "Jewelry"].map((clothingType: string) => (
+        clothingTypes = ["Outer", "Upper", "Lower", "Shoes", "Accessory"].map((clothingType: string) => (
             {
                 kind: "text",
                 label: clothingType,

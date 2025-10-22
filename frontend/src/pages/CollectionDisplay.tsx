@@ -30,13 +30,13 @@ function CollectionDisplay({whatToDisplay}: CollectionDisplayProps) {
                 <Grid container spacing={2}>
                     {displayItems ? displayItems.map((item, index) => (
                         <Grid size={{ xs:6, sm: 4, md: 3, lg: 2}} key={`${item.id}-${index}`}>
-                            <ItemDisplay data={item} />
+                            <ItemDisplay data={item} activeFilter={activeFilter} onFilterChange={applyFilters}/>
                         </Grid>
                     )) : (
                         // Render a bunch of Skeletons
                         Array.from({ length: SKELETON_COUNT }).map((_, index) => (
                             <Grid size={{ xs:6, sm: 4, md: 3, lg: 2}} key={index}>
-                                <ItemDisplay data={undefined} />
+                                <ItemDisplay data={undefined} activeFilter={activeFilter} onFilterChange={applyFilters}/>
                             </Grid>
                         ))
                     )}

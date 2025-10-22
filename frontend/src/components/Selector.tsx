@@ -48,6 +48,7 @@ function Selector({id, label, options, value, onChange, variant, multiple}: Sele
             }}
         renderInput={(params) => (
             <TextField 
+            className="capitalize"
             {...params}
             label={label}
             />

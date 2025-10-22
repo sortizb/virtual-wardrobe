@@ -78,7 +78,7 @@ function ItemEditor({ item_type, new_item, item_data }:ItemEditorProps) {
                                 id="type-selector"
                                 label="Clothing Type"
                                 labelId="type-selector-label"
-                                options={["Outter", "Upper", "Lower", "Shoes", "Accessory"]}
+                                options={["Outer", "Upper", "Lower", "Shoes", "Accessory"]}
                                 minWidth={200}
                                 />
                         </>

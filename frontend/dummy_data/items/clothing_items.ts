@@ -46,7 +46,7 @@ export const whiteSneakers = new ClothingPiece(
     "Shoes",
     {
         name: "white",
-        color: "#000000"
+        color: "#FFFFFF"
     },
     new Set<Season>(["Spring", "Summer"]),
     new Set<string>(["casual", "sports"]),

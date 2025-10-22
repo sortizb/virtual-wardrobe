@@ -2,12 +2,16 @@ import { Card, CardActions, CardContent, CardMedia, Skeleton, Typography, Button
 import ClothingPiece from "../models/ClothingPiece";
 import Outfit from "../models/Outfit";
 import imagePlaceHolder from "../assets/clothes.png";
+import type { ActiveFilter } from "../models/Types";
+import { act } from "react";
 
 interface ItemDisplayProps {
     data: ClothingPiece | Outfit | undefined;
+    activeFilter: ActiveFilter;
+    onFilterChange: (filters: Partial<ActiveFilter>) => void;
 }
 
-function ItemDisplay({ data }: ItemDisplayProps) {
+function ItemDisplay({ data, activeFilter, onFilterChange }: ItemDisplayProps) {
     return (
         <>
         <Card className="border-1 border-gray-200 rounded-2xl h-full shadow-lg">
@@ -39,6 +43,7 @@ function ItemDisplay({ data }: ItemDisplayProps) {
                                 size="small" 
                                 variant="outlined" 
                                 className="font-dmsans capitalize text-white bg-indigo-300 rounded-3xl font-semibold border-0"
+                                onClick={() => {onFilterChange({seasons: activeFilter.seasons?.concat({kind: "text", label: season, value: season})})}}
                             >
                                 {season}
                             </Button>
@@ -49,6 +54,7 @@ function ItemDisplay({ data }: ItemDisplayProps) {
                                 size="small" 
                                 variant="outlined" 
                                 className="font-dmsans capitalize text-white bg-indigo-400 rounded-3xl font-semibold"
+                                onClick={() => {onFilterChange({tags: activeFilter.tags?.concat({kind: "text", label: tag, value: tag})})}}
                             >
                                 {tag}
                             </Button>

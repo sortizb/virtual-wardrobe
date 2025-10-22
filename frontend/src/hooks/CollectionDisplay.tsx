@@ -31,21 +31,25 @@ function useCollectionDisplayState() {
     }
 
     function applyFilters(filters: Partial<ActiveFilter>) {
-        setActiveFilter(prev => ({...prev, ...filters}));
+        const newFilters = { ...activeFilter, ...filters };
+        setActiveFilter(newFilters);
 
         if (!originalItems) return;
 
         let filtered = [...originalItems];
 
-        if (activeFilter.search) {
+        // Substring relation
+        if (newFilters.search) {
             filtered = filtered.filter(item => 
-                item.name.toLocaleLowerCase().includes(activeFilter.search.toLocaleLowerCase())
+                item.name.toLocaleLowerCase().includes(newFilters.search.toLocaleLowerCase())
             );
         }
 
-        if (activeFilter.colors) {
+        // For Clothing Pieces: OR relationship
+        // For Outfits: AND relationship
+        if (newFilters.colors && newFilters.colors.length > 0) {
             filtered = filtered.filter(item =>
-                (activeFilter.colors ?? []).some(color => 
+                newFilters.colors!.some(color => 
                     item instanceof ClothingPiece ?
                     item.color.color === color.value :
                     item.hasColor({name: color.label, color: color.value})
@@ -53,25 +57,32 @@ function useCollectionDisplayState() {
             );
         }
 
-        if (activeFilter.seasons) {
-            filtered = filtered.filter(item => 
-                (activeFilter.seasons ?? []).some(season =>
-                    item.seasons.has(season.value as Season)
-                )
-            );
+        // AND relationship
+        if (newFilters.seasons && newFilters.seasons.length > 0) {
+            filtered = filtered.filter(item => {
+                for (let season of newFilters.seasons!) {
+                    if (!item.seasons.has(season.value as Season))
+                        return false;
+                }
+                return true;
+            });
         }
 
-        if (activeFilter.tags) {
-            filtered = filtered.filter(item => 
-                (activeFilter.tags ?? []).some(tag =>
-                    item.tags.has(tag.value.toLocaleLowerCase())
-                )
-            );
+        // AND relationship
+        if (newFilters.tags && newFilters.tags.length > 0) {
+            filtered = filtered.filter(item => {
+                for (let tag of newFilters.tags!) {
+                    if (!item.tags.has(tag.value.toLocaleLowerCase()))
+                        return false;
+                }
+                return true;
+            });
         }
 
-        if (activeFilter.clothingType) {
+        // OR relationship
+        if (newFilters.clothingType && newFilters.clothingType.length > 0) {
             filtered = filtered.filter(item =>
-                (activeFilter.clothingType ?? []).some(clothingType =>
+                newFilters.clothingType!.some(clothingType =>
                     item instanceof ClothingPiece ?
                     item.type == clothingType.value as ClothingType :
                     false
@@ -79,14 +90,17 @@ function useCollectionDisplayState() {
             );
         }
 
-        if (activeFilter.clothingPieces) {
-            filtered = filtered.filter(item =>
-                (activeFilter.clothingPieces ?? []).some(piece =>
-                    item instanceof Outfit ? 
-                    item.hasClothingPieceByID(piece.id) :
-                    false
-                )
-            );
+        // AND relationship
+        if (newFilters.clothingPieces && newFilters.clothingPieces.length > 0) {
+            filtered = filtered.filter(item => {
+                if (!(item instanceof Outfit)) return false;
+
+                for (let piece of newFilters.clothingPieces!) {
+                    if (!item.hasClothingPieceByID(piece.id))
+                        return false;
+                }
+                return true;
+            });
         }
 
         setDisplayItems(filtered);
