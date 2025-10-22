@@ -14,11 +14,12 @@ interface CollectionDisplayProps {
 
 function CollectionDisplay({whatToDisplay}: CollectionDisplayProps) {
 
-    const {displayItems, loadItems, activeFilter, applyFilters} = useCollectionDisplayState();
+    const {displayItems, loadItems, activeFilter, applyFilters, resetFilters} = useCollectionDisplayState();
     const SKELETON_COUNT = 6;
 
     useEffect(() => {
         loadItems(whatToDisplay);
+        resetFilters();
     }, [whatToDisplay])
 
     return (

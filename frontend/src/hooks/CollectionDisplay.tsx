@@ -106,7 +106,18 @@ function useCollectionDisplayState() {
         setDisplayItems(filtered);
     }
 
-    return {displayItems, loadItems, activeFilter, applyFilters};
+    function resetFilters() {
+        setActiveFilter({
+            search: '',
+            colors: [],
+            seasons: [],
+            tags: [],
+            clothingType: [],
+            clothingPieces: []
+        })
+    }
+
+    return {displayItems, loadItems, activeFilter, applyFilters, resetFilters};
 }
 
 export default useCollectionDisplayState;
