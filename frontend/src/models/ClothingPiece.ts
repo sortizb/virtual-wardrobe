@@ -1,7 +1,5 @@
 import WardrobeItem from "./WardrobeItem";
-import type { ClothingType } from "./Types";
-import type { Color, Season } from "./Types";
-
+import type { ClothingType, Color, Season } from "./Types";
 export default class ClothingPiece extends WardrobeItem{
 
     type: ClothingType;

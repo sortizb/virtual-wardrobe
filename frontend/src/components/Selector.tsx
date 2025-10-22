@@ -11,7 +11,7 @@ interface SelectorProps {
     multiple?: boolean;
 }
 
-function Selector({id, label, options, value, onChange, variant, multiple}: SelectorProps) {
+function Selector({id, label, options, value, onChange, variant, multiple}: Readonly<SelectorProps>) {
     return (
         <Autocomplete
         id={id}
@@ -29,12 +29,13 @@ function Selector({id, label, options, value, onChange, variant, multiple}: Sele
                         <Checkbox checked={selected} />
                         {variant !== "text" && option.kind !== "text" ? ( 
                             <div className="flex items-center gap-x-2">
+                                {/* Render Colored circle if option is color or small icon if kind is icon */}
                                 {option.value ? (
                                     <span className={"w-5 h-5 border rounded-sm"}
                                     style={variant === "color" && option.kind === "color" ? {backgroundColor: option.value} : {}}
                                     >
                                         {variant === "icon" && option.kind === "icon" ? (
-                                            <img src={option.value}/>
+                                            <img src={option.value} alt=""/>
                                         ) : (<></>)}
                                     </span>
                                 ) : (<></>)}

@@ -16,7 +16,7 @@ export default class Outfit extends WardrobeItem {
         }
 
     hasColor(color: Color): boolean {
-        for (let piece of this.clothes) {
+        for (const piece of this.clothes) {
             if (piece.color.color === color.color)
                 return true;
         }
@@ -25,7 +25,7 @@ export default class Outfit extends WardrobeItem {
 
     hasClothingPieceByID(id: string | undefined) {
         if (!id) return false;
-        for (let piece of this.clothes) {
+        for (const piece of this.clothes) {
             if (piece.id === id) {
                 return true;
             }

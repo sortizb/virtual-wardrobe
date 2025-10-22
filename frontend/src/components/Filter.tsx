@@ -11,13 +11,13 @@ interface FilterProps {
     onFilterChange: (filters: Partial<ActiveFilter>) => void;
 }
 
-function Filter({ kind, activeFilter, onFilterChange }: FilterProps) {
+function Filter({ kind, activeFilter, onFilterChange }: Readonly<FilterProps>) {
 
     const { filterOptions, loadOptions, handleSearchChange } = useFilterState();
 
     useEffect(() => {
         loadOptions(kind);
-    }, [kind])
+    }, [kind, loadOptions])
 
     return (
         <Box 
@@ -39,7 +39,7 @@ function Filter({ kind, activeFilter, onFilterChange }: FilterProps) {
                     input: {
                         startAdornment: (
                             <InputAdornment position="start">
-                                <img src={searchIcon} className="max-w-5"/>
+                                <img src={searchIcon} className="max-w-5" alt=""/>
                             </InputAdornment>
                         ),
                         classes: {
@@ -55,7 +55,19 @@ function Filter({ kind, activeFilter, onFilterChange }: FilterProps) {
                         label="Color"
                         options={filterOptions ? filterOptions.colors : []}
                         value={activeFilter.colors}
-                        onChange={(newValue => onFilterChange({colors: Array.isArray(newValue) ? newValue : newValue ? [newValue] : null}))}
+                        onChange={(newValue) => {
+                            if (newValue) {
+                                if (Array.isArray(newValue)) {
+                                    onFilterChange({colors: newValue});
+                                }
+                                else {
+                                    onFilterChange({colors: [newValue]});
+                                }
+                            }
+                            else {
+                                onFilterChange({colors: []});
+                            }
+                        }}
                         variant="color"
                         multiple
                     />
@@ -64,7 +76,19 @@ function Filter({ kind, activeFilter, onFilterChange }: FilterProps) {
                         label="Season"
                         options={filterOptions ? filterOptions.seasons : []}
                         value={activeFilter.seasons}
-                        onChange={(newValue => onFilterChange({seasons: Array.isArray(newValue) ? newValue : newValue ? [newValue] : null}))}
+                        onChange={(newValue) => {
+                            if (newValue) {
+                                if (Array.isArray(newValue)) {
+                                    onFilterChange({seasons: newValue});
+                                }
+                                else {
+                                    onFilterChange({seasons: [newValue]});
+                                }
+                            }
+                            else {
+                                onFilterChange({seasons: []});
+                            }
+                        }}
                         variant="text"
                         multiple
                     />
@@ -75,7 +99,19 @@ function Filter({ kind, activeFilter, onFilterChange }: FilterProps) {
                         label="Tags"
                         options={filterOptions ? filterOptions.tags : []}
                         value={activeFilter.tags}
-                        onChange={(newValue => onFilterChange({tags: Array.isArray(newValue) ? newValue : newValue ? [newValue] : null}))}
+                        onChange={(newValue) => {
+                            if (newValue) {
+                                if (Array.isArray(newValue)) {
+                                    onFilterChange({tags: newValue});
+                                }
+                                else {
+                                    onFilterChange({tags: [newValue]});
+                                }
+                            }
+                            else {
+                                onFilterChange({tags: []});
+                            }
+                        }}
                         variant="text"
                         multiple
                     />
@@ -85,7 +121,19 @@ function Filter({ kind, activeFilter, onFilterChange }: FilterProps) {
                             label="Category"
                             options={filterOptions ? filterOptions.clothingTypes : []}
                             value={activeFilter.clothingType}
-                            onChange={(newValue => onFilterChange({clothingType: Array.isArray(newValue) ? newValue : newValue ? [newValue] : null}))}
+                            onChange={(newValue) => {
+                                if (newValue) {
+                                    if (Array.isArray(newValue)) {
+                                        onFilterChange({clothingType: newValue});
+                                    }
+                                    else {
+                                        onFilterChange({clothingType: [newValue]});
+                                    }
+                                }
+                                else {
+                                    onFilterChange({clothingType: []});
+                                }
+                            }}
                             variant="text"
                             multiple
                         />
@@ -95,7 +143,19 @@ function Filter({ kind, activeFilter, onFilterChange }: FilterProps) {
                             label="Clothing Pieces"
                             options={filterOptions ? filterOptions.clothingPieces : []}
                             value={activeFilter.clothingPieces}
-                            onChange={(newValue => onFilterChange({clothingPieces: Array.isArray(newValue) ? newValue : newValue ? [newValue] : null}))}
+                            onChange={(newValue) => {
+                                if (newValue) {
+                                    if (Array.isArray(newValue)) {
+                                        onFilterChange({clothingPieces: newValue});
+                                    }
+                                    else {
+                                        onFilterChange({clothingPieces: [newValue]});
+                                    }
+                                }
+                                else {
+                                    onFilterChange({clothingPieces: []});
+                                }
+                            }}
                             variant="icon"
                             multiple
                         />

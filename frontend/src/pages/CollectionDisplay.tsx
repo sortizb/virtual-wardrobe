@@ -12,7 +12,7 @@ interface CollectionDisplayProps {
     whatToDisplay: ItemType;
 }
 
-function CollectionDisplay({whatToDisplay}: CollectionDisplayProps) {
+function CollectionDisplay({whatToDisplay}: Readonly<CollectionDisplayProps>) {
 
     const {displayItems, loadItems, activeFilter, applyFilters, resetFilters} = useCollectionDisplayState();
     const SKELETON_COUNT = 6;
@@ -20,7 +20,7 @@ function CollectionDisplay({whatToDisplay}: CollectionDisplayProps) {
     useEffect(() => {
         loadItems(whatToDisplay);
         resetFilters();
-    }, [whatToDisplay])
+    }, [loadItems, resetFilters, whatToDisplay])
 
     return (
         <Box id='app_container' className='flex flex-col items-center gap-8 mb-5 md:mb-10 lg:mb-15'>
@@ -35,8 +35,8 @@ function CollectionDisplay({whatToDisplay}: CollectionDisplayProps) {
                         </Grid>
                     )) : (
                         // Render a bunch of Skeletons
-                        Array.from({ length: SKELETON_COUNT }).map((_, index) => (
-                            <Grid size={{ xs:6, sm: 4, md: 3, lg: 2}} key={index}>
+                        Array.from({ length: SKELETON_COUNT }).map((item) => (
+                            <Grid size={{ xs:6, sm: 4, md: 3, lg: 2}} key={`skeleton-${item}`}>
                                 <ItemDisplay data={undefined} activeFilter={activeFilter} onFilterChange={applyFilters}/>
                             </Grid>
                         ))

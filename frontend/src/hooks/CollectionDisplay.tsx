@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import ClothingPiece from "../models/ClothingPiece";
 import Outfit from "../models/Outfit";
 import { dummyUser } from '../../dummy_data/users/users';
@@ -18,17 +18,24 @@ function useCollectionDisplayState() {
         tags: []
     });
 
-    async function loadItems(whatToDisplay: ItemType) {
+    // Simulate API call
+    const loadItems = useCallback(async (whatToDisplay: ItemType) => {
         setDisplayItems(undefined);
         setOriginalItems(undefined);
         await new Promise(res => setTimeout(res, 1000)); // Simulate latency
-        const items = whatToDisplay == "clothing" ? 
-        getAllUserClothes(dummyUser) : 
-        whatToDisplay == "outfit" ? 
-            getAllUserOutfits(dummyUser) : undefined;
+        let items: (ClothingPiece | Outfit)[] = [];
+        
+        // Simulate API calls
+        if (whatToDisplay == "clothing") {
+            items = getAllUserClothes(dummyUser);
+        }
+
+        else if (whatToDisplay == "outfit") {
+            items = getAllUserOutfits(dummyUser);
+        }
         setDisplayItems(items);
         setOriginalItems(items);
-    }
+    }, []);
 
     function applyFilters(filters: Partial<ActiveFilter>) {
         const newFilters = { ...activeFilter, ...filters };
@@ -60,7 +67,7 @@ function useCollectionDisplayState() {
         // AND relationship
         if (newFilters.seasons && newFilters.seasons.length > 0) {
             filtered = filtered.filter(item => {
-                for (let season of newFilters.seasons!) {
+                for (const season of newFilters.seasons!) {
                     if (!item.seasons.has(season.value as Season))
                         return false;
                 }
@@ -71,7 +78,7 @@ function useCollectionDisplayState() {
         // AND relationship
         if (newFilters.tags && newFilters.tags.length > 0) {
             filtered = filtered.filter(item => {
-                for (let tag of newFilters.tags!) {
+                for (const tag of newFilters.tags!) {
                     if (!item.tags.has(tag.value.toLocaleLowerCase()))
                         return false;
                 }
@@ -95,7 +102,7 @@ function useCollectionDisplayState() {
             filtered = filtered.filter(item => {
                 if (!(item instanceof Outfit)) return false;
 
-                for (let piece of newFilters.clothingPieces!) {
+                for (const piece of newFilters.clothingPieces!) {
                     if (!item.hasClothingPieceByID(piece.id))
                         return false;
                 }
@@ -106,7 +113,7 @@ function useCollectionDisplayState() {
         setDisplayItems(filtered);
     }
 
-    function resetFilters() {
+    const resetFilters = useCallback(() => {
         setActiveFilter({
             search: '',
             colors: [],
@@ -115,7 +122,7 @@ function useCollectionDisplayState() {
             clothingType: [],
             clothingPieces: []
         })
-    }
+    }, []);
 
     return {displayItems, loadItems, activeFilter, applyFilters, resetFilters};
 }

@@ -3,7 +3,6 @@ import ClothingPiece from "../models/ClothingPiece";
 import Outfit from "../models/Outfit";
 import imagePlaceHolder from "../assets/clothes.png";
 import type { ActiveFilter } from "../models/Types";
-import { act } from "react";
 
 interface ItemDisplayProps {
     data: ClothingPiece | Outfit | undefined;
@@ -11,9 +10,8 @@ interface ItemDisplayProps {
     onFilterChange: (filters: Partial<ActiveFilter>) => void;
 }
 
-function ItemDisplay({ data, activeFilter, onFilterChange }: ItemDisplayProps) {
+function ItemDisplay({ data, activeFilter, onFilterChange }: Readonly<ItemDisplayProps>) {
     return (
-        <>
         <Card className="border-1 border-gray-200 rounded-2xl h-full shadow-lg">
             {data ? (
                 <CardMedia 
@@ -69,7 +67,6 @@ function ItemDisplay({ data, activeFilter, onFilterChange }: ItemDisplayProps) {
                 )}
             </CardActions>
         </Card>
-        </>
     )
 }
 

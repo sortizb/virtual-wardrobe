@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { dummyUser } from "../../dummy_data/users/users";
 import type ClothingPiece from "../models/ClothingPiece";
 import type { ActiveFilter, Color, FilterOptions, ItemType, SelectorOption } from "../models/Types";
@@ -7,7 +7,7 @@ import { getAllUserTags, getAllUserColors, getAllUserClothes } from "../services
 
 
 // This is supposed to request user information from the API, for the moment it just loads dummy data
-async function loadFilterOptions(kind: ItemType, setFilterOptions: Function) {
+async function loadFilterOptions(kind: ItemType, setFilterOptions: (filterOptions: FilterOptions) => void) {
     const seasons: SelectorOption[] = ["Spring", "Summer", "Fall", "Winter"].map((season: string) => (
         {
             kind: "text",
@@ -73,7 +73,7 @@ export function useFilterState() {
             clothingTypes: [],
             clothingPieces: []
         });
-    const loadOptions = (kind: ItemType) => loadFilterOptions(kind, setFilterOptions);
+    const loadOptions = useCallback((kind: ItemType) => loadFilterOptions(kind, setFilterOptions), [setFilterOptions]);
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, onFilterChange: (activeFilter: Partial<ActiveFilter>) => void ) => {
         onFilterChange({ search: event.target.value })
     };

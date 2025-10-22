@@ -10,7 +10,7 @@ interface NavbarProps {
     currentPage: "closet" | "outfits" | "add" | "other";
 }
 
-function Navbar({currentPage}: NavbarProps) {
+function Navbar({currentPage}: Readonly<NavbarProps>) {
 
     const pages = ["closet", "outfits", "add"];
     const userSettings = ["My Profile", "Preferences", "Logout"];

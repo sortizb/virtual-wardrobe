@@ -1,5 +1,4 @@
-import { BrowserRouter, Navigate, Outlet } from "react-router";
-import { Routes, Route } from "react-router";
+import { BrowserRouter, Navigate, Outlet, Routes, Route } from "react-router";
 import CollectionDisplay from "../pages/CollectionDisplay";
 import EditItem from "../pages/EditItem";
 

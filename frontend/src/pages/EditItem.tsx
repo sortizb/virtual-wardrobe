@@ -8,11 +8,11 @@ import ItemEditor from '../components/ItemEditor';
 
 interface EditItemProps {
     item_type: ItemType;
-    new_item: Boolean;
+    new_item: boolean;
     item_data?: ClothingPiece | Outfit;
 }
 
-function EditItem({ item_type, new_item, item_data }:EditItemProps) {
+function EditItem({ item_type, new_item, item_data }: Readonly<EditItemProps>) {
     return (
         <Box id='app_container' className='flex flex-col items-center gap-8 p-10'>
             <Navbar currentPage={new_item ? 'add' : 'other'}/>
