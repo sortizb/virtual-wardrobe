@@ -7,6 +7,7 @@ import Greeting from "../components/Greeting";
 import type { ItemType } from "../models/Types";
 import useCollectionDisplayState from "../hooks/CollectionDisplay";
 import { useEffect } from "react";
+import { SKELETON_COUNT } from "../constants/global";
 
 interface CollectionDisplayProps {
     whatToDisplay: ItemType;
@@ -15,7 +16,8 @@ interface CollectionDisplayProps {
 function CollectionDisplay({whatToDisplay}: Readonly<CollectionDisplayProps>) {
 
     const {displayItems, loadItems, activeFilter, applyFilters, resetFilters} = useCollectionDisplayState();
-    const SKELETON_COUNT = 6;
+
+    const skeletonKeys = Array.from({ length: SKELETON_COUNT }, (_, i) => `skeleton-${i}`);
 
     useEffect(() => {
         loadItems(whatToDisplay);
@@ -35,8 +37,8 @@ function CollectionDisplay({whatToDisplay}: Readonly<CollectionDisplayProps>) {
                         </Grid>
                     )) : (
                         // Render a bunch of Skeletons
-                        Array.from({ length: SKELETON_COUNT }).map((item) => (
-                            <Grid size={{ xs:6, sm: 4, md: 3, lg: 2}} key={`skeleton-${item}`}>
+                        skeletonKeys.map((key) => (
+                            <Grid size={{ xs:6, sm: 4, md: 3, lg: 2}} key={`skeleton-${key}`}>
                                 <ItemDisplay data={undefined} activeFilter={activeFilter} onFilterChange={applyFilters}/>
                             </Grid>
                         ))
