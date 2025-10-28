@@ -7,23 +7,23 @@ import { Link } from 'react-router';
 import ItemEditor from '../components/ItemEditor';
 
 interface EditItemProps {
-    item_type: ItemType;
-    new_item: boolean;
-    item_data?: ClothingPiece | Outfit;
+    itemType: ItemType;
+    newItem: boolean;
+    itemData?: ClothingPiece | Outfit;
 }
 
-function EditItem({ item_type, new_item, item_data }: Readonly<EditItemProps>) {
+function EditItem({ itemType, newItem, itemData }: Readonly<EditItemProps>) {
     return (
         <Box id='app_container' className='flex flex-col items-center gap-8 p-10'>
-            <Navbar currentPage={new_item ? 'add' : 'other'}/>
+            <Navbar currentPage={newItem ? 'add' : 'other'}/>
             <Container className="max-w-screen flex flex-col gap-4 mt-10 items-center justify-center md:mt-15">
 
                 {/* Tab Selector */}
-                <Stack direction={'row'} gap={4} className={`w-full items-center align-middle justify-center ${new_item ? '' : 'hidden'}`}>
+                <Stack direction={'row'} gap={4} className={`w-full items-center align-middle justify-center ${newItem ? '' : 'hidden'}`}>
                     <Link to={'/user/add/clothing'}>
                         <Typography 
                         variant='subtitle1'
-                        className={`font-dmsans capitalize font-semibold text-lg ${(item_type === 'clothing') ? 'text-primary' : 'text-black'}`}
+                        className={`font-dmsans capitalize font-semibold text-lg ${(itemType === 'clothing') ? 'text-primary' : 'text-black'}`}
                         >
                             Clothing
                         </Typography>
@@ -31,7 +31,7 @@ function EditItem({ item_type, new_item, item_data }: Readonly<EditItemProps>) {
                     <Link to={'/user/add/outfit'}>
                         <Typography 
                         variant='subtitle1'
-                        className={`font-dmsans capitalize font-semibold text-lg ${(item_type === 'outfit') ? 'text-primary' : 'text-black'}`}
+                        className={`font-dmsans capitalize font-semibold text-lg ${(itemType === 'outfit') ? 'text-primary' : 'text-black'}`}
                         >
                             Outfit
                         </Typography>
@@ -39,9 +39,9 @@ function EditItem({ item_type, new_item, item_data }: Readonly<EditItemProps>) {
                 </Stack>
 
                 <ItemEditor 
-                item_type={item_type}
-                new_item={new_item}
-                item_data={item_data}
+                itemType={itemType}
+                newItem={newItem}
+                itemData={itemData}
                 />
 
             </Container>

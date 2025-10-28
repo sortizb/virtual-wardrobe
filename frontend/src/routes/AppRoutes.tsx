@@ -26,8 +26,8 @@ function AppRoutes() {
                     {/* Add Routes */}
                     <Route path="add" element={<AddLayout />}>
                         <Route index element={<Navigate to={"clothing"} replace/>}/>
-                        <Route path="clothing" element={<EditItem item_type="clothing" new_item={true}/>}/>
-                        <Route path="outfit" element={<EditItem item_type="outfit" new_item={true}/>}/>
+                        <Route path="clothing" element={<EditItem itemType="clothing" newItem={true}/>}/>
+                        <Route path="outfit" element={<EditItem itemType="outfit" newItem={true}/>}/>
                     </Route>
                 </Route>
 

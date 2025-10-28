@@ -54,3 +54,13 @@ export type EditorOptions = {
   clothingTypes: SelectorOption[];
   clothingPieces: SelectorOption[];
 }
+
+export type EditorForm = {
+  name: string | null;
+  imageUrl: string | null;
+  color: SelectorOption | null;
+  seasons: SelectorOption[] | null;
+  clothingType: SelectorOption | null;
+  clothingPieces: SelectorOption[] | null;
+  tags: SelectorOption[] | null;
+}
