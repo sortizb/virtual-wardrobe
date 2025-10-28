@@ -42,3 +42,15 @@ export type ActiveFilter = {
   clothingPieces: SelectorOption[] | null;
   tags: SelectorOption[] | null;
 }
+
+// For ItemEditor functionality
+// Even if some behavior is similar to Filter, I prefer having separate
+// types to avoid mixing code
+
+export type EditorOptions = {
+  colors: Color[];
+  tags: SelectorOption[];
+  seasons: SelectorOption[];
+  clothingTypes: SelectorOption[];
+  clothingPieces: SelectorOption[];
+}

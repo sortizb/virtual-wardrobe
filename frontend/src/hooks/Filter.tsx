@@ -1,67 +1,13 @@
 import { useCallback, useState } from "react";
 import { dummyUser } from "../../dummy_data/users/users";
-import type ClothingPiece from "../models/ClothingPiece";
-import type { ActiveFilter, Color, FilterOptions, ItemType, SelectorOption } from "../models/Types";
-import { getAllUserTags, getAllUserColors, getAllUserClothes } from "../services/user";
+import type { ActiveFilter, FilterOptions, ItemType } from "../models/Types";
+import { getUserOptions } from "../services/user";
 
 
 
 // This is supposed to request user information from the API, for the moment it just loads dummy data
-async function loadFilterOptions(kind: ItemType, setFilterOptions: (filterOptions: FilterOptions) => void) {
-    const seasons: SelectorOption[] = ["Spring", "Summer", "Fall", "Winter"].map((season: string) => (
-        {
-            kind: "text",
-            label: season,
-            value: season
-        }
-    ));
-
-    const tags: SelectorOption[] = getAllUserTags(dummyUser, kind).map((tag: string) => (
-        {
-            kind: "text",
-            label: tag,
-            value: tag
-        }
-    ));
-    const colors: SelectorOption[] = getAllUserColors(dummyUser).map((color: Color) => (
-        {
-            kind: "color",
-            label: color.name,
-            value: color.color
-        }
-    ));
-    
-    let clothingTypes: SelectorOption[] = [];
-    let clothingPieces: SelectorOption[] = [];
-
-    if (kind == "clothing") {
-        clothingTypes = ["Outer", "Upper", "Lower", "Shoes", "Accessory"].map((clothingType: string) => (
-            {
-                kind: "text",
-                label: clothingType,
-                value: clothingType
-            }
-        ))
-    }
-    else {
-        clothingPieces = getAllUserClothes(dummyUser).map((clothing: ClothingPiece) => (
-            {
-                kind: "icon",
-                label: clothing.name,
-                value: clothing.imageUrl ?? "",
-                id: clothing.id
-            }
-        ));
-    }
-
-    const filterOptions: FilterOptions = {
-        colors: colors,
-        tags: tags,
-        seasons: seasons,
-        clothingTypes: clothingTypes,
-        clothingPieces: clothingPieces
-    }
-
+function loadFilterOptions(itemType: ItemType, setFilterOptions: (filterOptions: FilterOptions) => void) {
+    const filterOptions: FilterOptions = getUserOptions(dummyUser, itemType, "filter") as FilterOptions;
     setFilterOptions(filterOptions);
 }
 
@@ -73,7 +19,7 @@ export function useFilterState() {
             clothingTypes: [],
             clothingPieces: []
         });
-    const loadOptions = useCallback((kind: ItemType) => loadFilterOptions(kind, setFilterOptions), [setFilterOptions]);
+    const loadOptions = useCallback((itemType: ItemType) => loadFilterOptions(itemType, setFilterOptions), [setFilterOptions]);
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, onFilterChange: (activeFilter: Partial<ActiveFilter>) => void ) => {
         onFilterChange({ search: event.target.value })
     };
