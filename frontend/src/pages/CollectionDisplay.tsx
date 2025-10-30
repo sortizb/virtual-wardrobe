@@ -10,43 +10,73 @@ import { useEffect } from "react";
 import { SKELETON_COUNT } from "../constants/global";
 
 interface CollectionDisplayProps {
-    whatToDisplay: ItemType;
+  whatToDisplay: ItemType;
 }
 
-function CollectionDisplay({whatToDisplay}: Readonly<CollectionDisplayProps>) {
+function CollectionDisplay({ whatToDisplay }: Readonly<CollectionDisplayProps>) {
+  const { displayItems, loadItems, activeFilter, applyFilters, resetFilters } =
+    useCollectionDisplayState();
 
-    const {displayItems, loadItems, activeFilter, applyFilters, resetFilters} = useCollectionDisplayState();
+  useEffect(() => {
+    loadItems(whatToDisplay);
+    resetFilters();
+  }, [loadItems, resetFilters, whatToDisplay]);
 
-    const skeletonKeys = Array.from({ length: SKELETON_COUNT }, (_, i) => `skeleton-${i}`);
+  // Skeleton keys for placeholders (strings are fine)
+  const skeletonKeys = Array.from({ length: SKELETON_COUNT }, (_, i) => `skeleton-${i}`);
 
-    useEffect(() => {
-        loadItems(whatToDisplay);
-        resetFilters();
-    }, [loadItems, resetFilters, whatToDisplay])
+  return (
+    <Box
+      id="app_container"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      gap={{ xs: 6, md: 8 }}
+      mb={{ xs: 5, md: 10 }}
+    >
+      <Navbar currentPage={whatToDisplay === "clothing" ? "closet" : "outfits"} />
+      <Greeting />
 
-    return (
-        <Box id='app_container' className='flex flex-col items-center gap-8 mb-5 md:mb-10 lg:mb-15'>
-            <Navbar currentPage={whatToDisplay == "clothing" ? "closet" : "outfits"}/>
-            <Greeting />
-            <Container className="max-w-screen flex flex-col gap-4">
-                <Filter kind={whatToDisplay} activeFilter={activeFilter} onFilterChange={applyFilters}/>
-                <Grid container spacing={2}>
-                    {displayItems ? displayItems.map((item, index) => (
-                        <Grid size={{ xs:6, sm: 4, md: 3, lg: 2}} key={`${item.id}-${index}`}>
-                            <ItemDisplay data={item} activeFilter={activeFilter} onFilterChange={applyFilters}/>
-                        </Grid>
-                    )) : (
-                        // Render a bunch of Skeletons
-                        skeletonKeys.map((key) => (
-                            <Grid size={{ xs:6, sm: 4, md: 3, lg: 2}} key={`skeleton-${key}`}>
-                                <ItemDisplay data={undefined} activeFilter={activeFilter} onFilterChange={applyFilters}/>
-                            </Grid>
-                        ))
-                    )}
-                </Grid>
-            </Container>
-        </Box>
-    );
+      <Container
+        maxWidth="xl"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 4,
+        }}
+      >
+        <Filter
+          kind={whatToDisplay}
+          activeFilter={activeFilter}
+          onFilterChange={applyFilters}
+        />
+
+        <Grid container spacing={2}>
+          {displayItems && displayItems.length > 0 ? (
+            displayItems.map((item, index) => (
+              <Grid
+                size={{ xs:6, sm: 4, md: 3, lg: 2}}
+                key={`${item.id ?? index}`} 
+              >
+                <ItemDisplay
+                  data={item} // item typed as ClothingPiece | Outfit
+                  activeFilter={activeFilter}
+                  onFilterChange={applyFilters}
+                />
+              </Grid>
+            ))
+          ) : (
+            // Render skeleton placeholders when displayItems is undefined or empty
+            skeletonKeys.map((key) => (
+              <Grid size={{ xs:6, sm: 4, md: 3, lg: 2}} key={key}>
+                <ItemDisplay data={undefined} activeFilter={activeFilter} onFilterChange={applyFilters} />
+              </Grid>
+            ))
+          )}
+        </Grid>
+      </Container>
+    </Box>
+  );
 }
 
 export default CollectionDisplay;

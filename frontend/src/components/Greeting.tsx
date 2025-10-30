@@ -4,7 +4,7 @@ import { Link } from "react-router";
 function Greeting() {
     return (
         <Container id="Greeting_container" maxWidth="xl" className="flex flex-col gap-5 items-center">
-            <Box className="mt-25 p-5 bg-gray-200 rounded-xl flex flex-col items-center gap-5 w-full">
+            <Box className="p-5 bg-gray-200 rounded-xl flex flex-col items-center gap-5 w-full">
                 <Typography
                 variant="h2"
                 className="font-outfit font-bold text-center text-5xl"
