@@ -12,7 +12,7 @@ interface ItemDisplayProps {
 
 function ItemDisplay({ data, activeFilter, onFilterChange }: Readonly<ItemDisplayProps>) {
     return (
-        <Card className="border-1 border-gray-200 rounded-2xl h-full shadow-lg">
+        <Card className="border-1 border-gray-200 rounded-2xl h-full hover:shadow-lg hover:transition-shadow hover:-translate-y-1.5 hover:cursor-pointer">
             {data ? (
                 <CardMedia 
                     component="img"
@@ -40,8 +40,7 @@ function ItemDisplay({ data, activeFilter, onFilterChange }: Readonly<ItemDispla
                                 key={season} 
                                 size="small" 
                                 variant="outlined" 
-                                className="font-dmsans capitalize text-white bg-indigo-300 rounded-3xl font-semibold border-0"
-                                onClick={() => {onFilterChange({seasons: activeFilter.seasons?.concat({kind: "text", label: season, value: season})})}}
+                                className="capitalize text-amber-50 bg-primary rounded-3xl font-semibold hover:transition-shadow hover:translate-y-0.5 hover:font-bold"                                onClick={() => {onFilterChange({seasons: activeFilter.seasons?.concat({kind: "text", label: season, value: season})})}}
                             >
                                 {season}
                             </Button>
@@ -51,7 +50,7 @@ function ItemDisplay({ data, activeFilter, onFilterChange }: Readonly<ItemDispla
                                 key={tag} 
                                 size="small" 
                                 variant="outlined" 
-                                className="font-dmsans capitalize text-white bg-indigo-400 rounded-3xl font-semibold"
+                                className="capitalize text-amber-50 bg-primary rounded-3xl font-semibold hover:transition-shadow hover:translate-y-0.5 hover:font-bold"
                                 onClick={() => {onFilterChange({tags: activeFilter.tags?.concat({kind: "text", label: tag, value: tag})})}}
                             >
                                 {tag}

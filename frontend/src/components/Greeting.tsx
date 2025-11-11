@@ -1,48 +1,36 @@
-import { Button, Box, Container, Stack, Typography } from "@mui/material";
-import { Link } from "react-router";
+import { Box, Container, Typography } from "@mui/material";
 
 function Greeting() {
-    return (
-        <Container id="Greeting_container" maxWidth="xl" className="flex flex-col gap-5 items-center">
-            <Box className="p-5 bg-gray-200 rounded-xl flex flex-col items-center gap-5 w-full">
-                <Typography
-                variant="h2"
-                className="font-outfit font-bold text-center text-5xl"
-                >
-                    Welcome back, Santiago!
-                </Typography>
-                <Typography
-                variant="h6"
-                className="text-center font-dmsans text-gray-500 text-md"
-                >
-                    Explore your virtual closet, discover new styles, and create stunning outfits. 
-                    Your fashion journey starts here.
-                </Typography>
-            </Box>
-            <Stack spacing={5} direction="row">
-                <Link
-                to={"/user/add/clothing"}
-                >
-                    <Button
-                    size="large"
-                    className="font-dmsans bg-primary text-white font-bold normal-case rounded-4xl"
-                    >
-                        + Add Clothing
-                    </Button>
-                </Link>
-                <Link
-                to={"/user/add/outfit"}
-                >
-                    <Button
-                    size="large"
-                    className="font-dmsans bg-white normal-case font-bold rounded-4xl border-2 border-black text-black"
-                    >
-                        Create Outfit
-                    </Button>
-                </Link>
-            </Stack>
-        </Container>
-    );
+  return (
+    <Container
+      id="Greeting_container"
+      maxWidth="xl"
+      className="flex flex-col gap-5 items-center"
+    >
+      <Box
+        className="rounded-2xl flex flex-col items-center gap-5 w-full shadow-sm"
+        sx={(theme) => ({
+          p: 5,
+          backgroundColor: theme.palette.background.paper,
+          border: `1px solid ${theme.palette.divider}`,
+        })}
+      >
+        <Typography
+          variant="h2"
+          className=" font-bold text-center text-5xl"
+        >
+          Welcome back, Santiago!
+        </Typography>
+        <Typography
+          variant="h6"
+          className="text-center  text-gray-500 text-md"
+        >
+          Explore your virtual closet, discover new styles, and create stunning
+          outfits. Your fashion journey starts here.
+        </Typography>
+      </Box>
+    </Container>
+  );
 }
 
 export default Greeting;

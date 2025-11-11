@@ -24,7 +24,7 @@ function Filter({ kind, activeFilter, onFilterChange }: Readonly<FilterProps>) {
         component="form" 
         autoComplete="off" 
         noValidate 
-        className="flex flex-col flex-auto grow shrink gap-4 md:flex-row border-2 border-gray-200 p-5 rounded-2xl md:rounded-4xl">
+        className="flex flex-col flex-auto grow shrink gap-4 md:flex-row border-2 border-gray-200 p-5 rounded-2xl md:rounded-4xl hover:shadow-xl">
 
             <TextField
                 id="search"
@@ -43,7 +43,7 @@ function Filter({ kind, activeFilter, onFilterChange }: Readonly<FilterProps>) {
                             </InputAdornment>
                         ),
                         classes: {
-                            root: "rounded-2xl bg-gray-100"
+                            root: "rounded-2xl"
                         }
                     }
                 }}

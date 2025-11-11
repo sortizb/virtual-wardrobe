@@ -37,13 +37,14 @@ export default function Navbar({ currentPage }: Readonly<NavbarProps>) {
     <AppBar
       id="navbar"
       position="sticky"
-      color="transparent"
-      elevation={1}
+      elevation={0}
       sx={{
-        backdropFilter: "blur(8px)",
+        bgcolor: "primary.main",
+        backdropFilter: "blur(6px)",
         borderBottom: "1px solid",
         borderColor: "divider",
-        bgcolor: "background.paper",
+        color: "primary.contrastText",
+        borderRadius: "0"
       }}
     >
       <Container maxWidth="xl">
@@ -57,18 +58,24 @@ export default function Navbar({ currentPage }: Readonly<NavbarProps>) {
             py: 1,
           }}
         >
-          {/* Mobile Menu Button */}
-          <Box sx={{ width: 48, display: { xs: "flex", md: "none" }, justifyContent: "center" }}>
+          {/* --- Mobile Menu Button --- */}
+          <Box
+            sx={{
+              width: 48,
+              display: { xs: "flex", md: "none" },
+              justifyContent: "center",
+            }}
+          >
             <IconButton
               size="large"
               onClick={handleOpenNavMenu}
-              sx={{ color: "text.primary" }}
+              sx={{ color: "primary.contrastText" }}
             >
               <MenuRoundedIcon fontSize="inherit" />
             </IconButton>
           </Box>
 
-          {/* Mobile Menu Items */}
+          {/* --- Mobile Menu Items --- */}
           <Menu
             anchorEl={anchorElNavMenu}
             anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
@@ -76,7 +83,15 @@ export default function Navbar({ currentPage }: Readonly<NavbarProps>) {
             open={Boolean(anchorElNavMenu)}
             onClose={handleCloseNavMenu}
             disableScrollLock
-            sx={{ display: { xs: "block", md: "none" } }}
+            sx={{
+              display: { xs: "block", md: "none" },
+              "& .MuiPaper-root": {
+                bgcolor: "background.paper",
+                borderRadius: 2,
+                mt: 1,
+                boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
+              },
+            }}
           >
             {pages.map((page) => (
               <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -84,8 +99,11 @@ export default function Navbar({ currentPage }: Readonly<NavbarProps>) {
                   <Typography
                     sx={{
                       textTransform: "capitalize",
-                      color: page === currentPage ? "primary.main" : "text.secondary",
-                      fontFamily: "var(--font-body)",
+                      color:
+                        page === currentPage
+                          ? "primary.main"
+                          : "text.secondary",
+                      fontFamily: "Outfit, sans-serif",
                     }}
                   >
                     {page}
@@ -95,11 +113,11 @@ export default function Navbar({ currentPage }: Readonly<NavbarProps>) {
             ))}
           </Menu>
 
-          {/* Logo with subtle animation */}
+          {/* --- Logo with motion --- */}
           <Link to="/user/closet" style={{ textDecoration: "none" }}>
             <motion.div
-              whileHover={{ scale: 1.05, rotate: 1 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              whileHover={{ scale: 1.04, rotate: 1 }}
+              transition={{ type: "spring", stiffness: 250 }}
             >
               <Box
                 sx={{
@@ -109,12 +127,17 @@ export default function Navbar({ currentPage }: Readonly<NavbarProps>) {
                   cursor: "pointer",
                 }}
               >
-                <CheckroomRoundedIcon sx={{ color: "primary.main", fontSize: 34 }} />
+                <CheckroomRoundedIcon
+                  sx={{
+                    color: "primary.contrastText",
+                    fontSize: 34,
+                  }}
+                />
                 <Typography
                   variant="h5"
                   sx={{
-                    color: "primary.main",
-                    fontFamily: "var(--font-logo)",
+                    color: "primary.contrastText",
+                    fontFamily: '"Playfair Display", serif',
                     fontStyle: "italic",
                     fontWeight: 600,
                     letterSpacing: "0.5px",
@@ -126,27 +149,39 @@ export default function Navbar({ currentPage }: Readonly<NavbarProps>) {
             </motion.div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* --- Desktop Navigation --- */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
             {pages.map((page) => (
-              <Link key={page} to={`/user/${page}`} style={{ textDecoration: "none" }}>
-                <motion.div whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 300 }}>
+              <Link
+                key={page}
+                to={`/user/${page}`}
+                style={{ textDecoration: "none" }}
+              >
+                <motion.div
+                  whileHover={{ y: -2 }}
+                  transition={{ type: "spring", stiffness: 250 }}
+                >
                   <Button
                     disableRipple
                     sx={{
                       textTransform: "capitalize",
                       fontSize: "1rem",
-                      fontFamily: "var(--font-body)",
-                      color: page === currentPage ? "primary.main" : "text.secondary",
+                      fontFamily: "Outfit, sans-serif",
+                      color:
+                        page === currentPage
+                          ? "#FFFFFF"
+                          : "rgba(255,255,255,0.75)",
                       borderBottom:
-                        page === currentPage ? "2px solid" : "2px solid transparent",
-                      borderColor: "primary.main",
+                        page === currentPage
+                          ? "2px solid rgba(255,255,255,0.9)"
+                          : "2px solid transparent",
                       borderRadius: 0,
                       "&:hover": {
-                        borderColor: "primary.main",
-                        color: "primary.main",
+                        borderColor: "rgba(255,255,255,0.9)",
+                        color: "#FFFFFF",
                         bgcolor: "transparent",
                       },
+                      transition: "all 0.25s ease",
                     }}
                   >
                     {page}
@@ -156,24 +191,45 @@ export default function Navbar({ currentPage }: Readonly<NavbarProps>) {
             ))}
           </Box>
 
-          {/* User Avatar */}
+          {/* --- User Avatar --- */}
           <IconButton onClick={handleOpenUserMenu}>
-            <Avatar sx={{ bgcolor: "primary.light", color: "primary.contrastText" }}>
+            <Avatar
+              sx={{
+                bgcolor: "rgba(255,255,255,0.3)",
+                color: "primary.contrastText",
+                backdropFilter: "blur(2px)",
+                border: "1px solid rgba(255,255,255,0.4)",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+              }}
+            >
               <AccountCircleRoundedIcon />
             </Avatar>
           </IconButton>
 
-          {/* User Menu */}
+          {/* --- User Menu --- */}
           <Menu
             anchorEl={anchorElUserMenu}
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             transformOrigin={{ vertical: "top", horizontal: "right" }}
             open={Boolean(anchorElUserMenu)}
             onClose={handleCloseUserMenu}
+            sx={{
+              "& .MuiPaper-root": {
+                bgcolor: "background.paper",
+                borderRadius: 2,
+                mt: 1,
+                boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+              },
+            }}
           >
             {userSettings.map((setting) => (
               <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography sx={{ fontFamily: "var(--font-body)", color: "text.primary" }}>
+                <Typography
+                  sx={{
+                    fontFamily: "Outfit, sans-serif",
+                    color: "text.primary",
+                  }}
+                >
                   {setting}
                 </Typography>
               </MenuItem>

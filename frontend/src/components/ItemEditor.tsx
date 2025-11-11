@@ -23,7 +23,7 @@ function ItemEditor({ itemType, newItem, itemData }: Readonly<ItemEditorProps>) 
 
             <Typography 
             variant="h5"
-            className="font-dmsans capitalize font-semibold"
+            className=" capitalize font-semibold"
             >
                 {itemData ? itemData.name : `New ${itemType}`}
             </Typography>
@@ -41,7 +41,7 @@ function ItemEditor({ itemType, newItem, itemData }: Readonly<ItemEditorProps>) 
                         </Card>
                     ) : (
                         <div className="flex flex-col items-center justify-center bg-gray-100 gap-2
-                        border-2 border-dashed font-dmsans text-xl hover:bg-gray-200 hover:cursor-pointer
+                        border-2 border-dashed  text-xl hover:bg-gray-200 hover:cursor-pointer
                         rounded-2xl w-60 h-70 
                         md:rounded-4xl md:h-90 md:w-80 
                         lg:h-110 lg:w-80

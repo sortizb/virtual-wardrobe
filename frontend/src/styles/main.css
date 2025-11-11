@@ -5,5 +5,7 @@
     --font-outfit: Outfit, sans-serif;
     --font-dmsans: DM Sans, sans-serif;
     --font-borel: Borel, cursive;
-    --color-primary: #7D83FA;
+    --color-primary: #B7A99A;
+    --animate-fade-in-up: {'0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' }}
 }

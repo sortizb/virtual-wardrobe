@@ -23,7 +23,7 @@ function EditItem({ itemType, newItem, itemData }: Readonly<EditItemProps>) {
                     <Link to={'/user/add/clothing'}>
                         <Typography 
                         variant='subtitle1'
-                        className={`font-dmsans capitalize font-semibold text-lg ${(itemType === 'clothing') ? 'text-primary' : 'text-black'}`}
+                        className={` capitalize font-semibold text-lg ${(itemType === 'clothing') ? 'text-primary' : 'text-black'}`}
                         >
                             Clothing
                         </Typography>
@@ -31,7 +31,7 @@ function EditItem({ itemType, newItem, itemData }: Readonly<EditItemProps>) {
                     <Link to={'/user/add/outfit'}>
                         <Typography 
                         variant='subtitle1'
-                        className={`font-dmsans capitalize font-semibold text-lg ${(itemType === 'outfit') ? 'text-primary' : 'text-black'}`}
+                        className={` capitalize font-semibold text-lg ${(itemType === 'outfit') ? 'text-primary' : 'text-black'}`}
                         >
                             Outfit
                         </Typography>

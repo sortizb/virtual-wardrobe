@@ -25,7 +25,7 @@ function Selector({id, label, options, value, onChange, variant, multiple}: Read
         isOptionEqualToValue={(one, other) => one.value == other.value}
         renderOption={(props, option, { selected }) => {
                 return (
-                    <li {...props} className={`flex items-center gap-x-2 font-dmsans capitalize ${selected ? 'text-primary font-semibold' : ''}`}>
+                    <li {...props} className={`flex items-center gap-x-2 capitalize ${selected ? 'text-primary font-semibold' : ''}`}>
                         <Checkbox checked={selected} />
                         {variant !== "text" && option.kind !== "text" ? ( 
                             <div className="flex items-center gap-x-2">
